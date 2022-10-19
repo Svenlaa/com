@@ -19,6 +19,6 @@ export default defineNextConfig({
   // Next.js i18n docs: https://nextjs.org/docs/advanced-features/i18n-routing
   i18n: {
     locales: ["en", "nl"],
-    defaultLocale: "en",
+    defaultLocale: "nl",
   },
 });
