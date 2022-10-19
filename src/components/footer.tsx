@@ -23,7 +23,7 @@ const Footer = () => {
   return (
     <footer className="fixed bottom-0  flex w-screen flex-row justify-center bg-gray-300 p-2 dark:bg-gray-700 ">
       <div className="flex w-5/6 flex-row justify-around md:w-3/6">
-        <Flag label="🇳🇱" code="nl" langName="Dutch" />
+        <Flag label="🇳🇱" code="nl" langName="Nederlands" />
         <Flag label="🇬🇧" code="en" langName="English" />
       </div>
       <span className="bg-red-500"></span>
