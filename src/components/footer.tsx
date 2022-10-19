@@ -26,7 +26,6 @@ const Footer = () => {
         <Flag label="🇳🇱" code="nl" langName="Nederlands" />
         <Flag label="🇬🇧" code="en" langName="English" />
       </div>
-      <span className="bg-red-500"></span>
     </footer>
   );
 };
