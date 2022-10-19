@@ -5,6 +5,7 @@ import type { Session } from "next-auth";
 import type { AppType } from "next/app";
 import { trpc } from "../utils/trpc";
 import { NextIntlProvider } from "next-intl";
+import Footer from "../components/footer";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -16,6 +17,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
       {/* @ts-ignore */}
       <NextIntlProvider messages={pageProps.messages}>
         <Component {...pageProps} />
+        <Footer />
       </NextIntlProvider>
     </SessionProvider>
   );
