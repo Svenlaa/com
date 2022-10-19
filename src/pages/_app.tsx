@@ -12,6 +12,8 @@ const MyApp: AppType<{ session: Session | null }> = ({
 }) => {
   return (
     <SessionProvider session={session}>
+      {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+      {/* @ts-ignore */}
       <NextIntlProvider messages={pageProps.messages}>
         <Component {...pageProps} />
       </NextIntlProvider>
