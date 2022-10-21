@@ -2,6 +2,7 @@ import { GetStaticProps } from "next";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import pick from "lodash/pick";
+import CommonLayout from "../layouts/common";
 
 const AccountPage = () => {
   const { data: session } = useSession();
@@ -12,13 +13,13 @@ const AccountPage = () => {
     : t("not_signed_in");
 
   return (
-    <div className="p-4">
+    <CommonLayout>
       <Welcome name={session?.user?.name} />
       <div className="flex flex-row flex-wrap">
-        <p className="py-2 px-3">{signInText}</p>
+        <p className="py-2 pr-3">{signInText}</p>
         <SignButton hasSession={!!session} />
       </div>
-    </div>
+    </CommonLayout>
   );
 };
 
@@ -30,7 +31,7 @@ const Welcome = ({ name }: { name?: string | null }) => {
   const t = useTranslations("Account");
 
   return (
-    <h1 className="px-3 pb-4 text-3xl font-extrabold first-letter:capitalize">
+    <h1 className="text-3xl font-extrabold first-letter:capitalize">
       {t("welcome")}{" "}
       <span className="font-extrabold text-blue-700 dark:text-blue-400">
         {name ?? t("guest_name")}
