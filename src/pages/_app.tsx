@@ -7,14 +7,12 @@ import { trpc } from "../utils/trpc";
 import { NextIntlProvider } from "next-intl";
 import Footer from "../components/footer";
 
-const MyApp: AppType<{ session: Session | null }> = ({
+const MyApp: AppType<{ session: Session | null; messages: IntlMessages }> = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
   return (
     <SessionProvider session={session}>
-      {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-      {/* @ts-ignore */}
       <NextIntlProvider messages={pageProps.messages}>
         <Component {...pageProps} />
         <Footer />

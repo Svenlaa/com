@@ -1,5 +1,13 @@
 {
-  "Hello": {
+  "Home": {
     "greeting": "Hello World!"
+  },
+  "Account": {
+    "welcome": "welcome",
+    "guest_name": "Guest",
+    "sign_out": "Sign out",
+    "sign_in_with": "Sign in with ",
+    "signed_in_as": "You are signed in as ",
+    "not_signed_in": "You aren't signed in"
   }
 }

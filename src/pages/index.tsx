@@ -1,8 +1,9 @@
-import { GetStaticProps, NextPage } from "next";
+import { GetStaticProps } from "next";
 import { useTranslations } from "next-intl";
+import pick from "lodash/pick";
 
-const YesPage: NextPage = () => {
-  const t = useTranslations("Hello");
+const HomePage = () => {
+  const t = useTranslations("Home");
   return (
     <>
       <p>{t("greeting")}</p>
@@ -10,10 +11,15 @@ const YesPage: NextPage = () => {
   );
 };
 
+HomePage.messages = ["Home"];
+
 export const getStaticProps: GetStaticProps = async ({ locale }) => ({
   props: {
-    messages: (await import(`../../messages/${locale}.json`)).default,
+    messages: pick(
+      await import(`../../messages/${locale}.json`),
+      HomePage.messages
+    ),
   },
 });
 
-export default YesPage;
+export default HomePage;
