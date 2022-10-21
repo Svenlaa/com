@@ -7,7 +7,7 @@
     "dev": "next dev --port 2000",
     "postinstall": "prisma generate",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start --port 2000"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.4",
