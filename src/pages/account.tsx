@@ -33,7 +33,7 @@ const Welcome = ({ name }: { name?: string | null }) => {
   return (
     <h1 className="text-3xl font-extrabold first-letter:capitalize">
       {t("welcome")}{" "}
-      <span className="font-extrabold text-blue-700 dark:text-blue-400">
+      <span className="font-extrabold text-prime-700 dark:text-prime-400">
         {name ?? t("guest_name")}
       </span>
     </h1>
@@ -46,7 +46,7 @@ const SignButton = ({ hasSession }: { hasSession?: boolean }) => {
   return (
     <button
       onClick={hasSession ? () => signOut() : () => signIn("github")}
-      className="rounded-full bg-red-500 py-2 px-3 text-gray-200  dark:text-gray-900"
+      className="rounded-full bg-red-500 py-2 px-3 text-gray-200 dark:text-gray-900"
     >
       {hasSession ? t("sign_out") : t("sign_in_with") + "Github"}
     </button>

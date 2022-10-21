@@ -13,9 +13,7 @@ const HomePage = () => {
     <CommonLayout className="flex h-full items-center justify-center">
       <h1 className="text-3xl font-extrabold first-letter:capitalize">
         {words.join(" ") + " "}
-        <span className="font-extrabold text-blue-700 dark:text-blue-400">
-          {lastWord}
-        </span>
+        <span className="text-prime-600 dark:text-prime-400">{lastWord}</span>
       </h1>
     </CommonLayout>
   );

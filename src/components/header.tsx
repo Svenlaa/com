@@ -32,8 +32,8 @@ const Lin = ({ to, children, isActive }: LinkProps) => {
       <a
         className={`${
           isActive
-            ? "bg-purple-500 hover:bg-purple-400 hover:dark:bg-purple-600"
-            : "hover:bg-gray-300 dark:hover:bg-gray-800"
+            ? "bg-prime-500 hover:bg-prime-400 hover:dark:bg-prime-600"
+            : "hover:bg-prime-300 dark:hover:bg-gray-800"
         } rounded-md p-2 text-lg`}
       >
         {children}
