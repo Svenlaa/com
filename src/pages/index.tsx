@@ -10,7 +10,7 @@ const HomePage = () => {
   const lastWord = words.pop();
 
   return (
-    <CommonLayout>
+    <CommonLayout className="flex h-full items-center justify-center">
       <h1 className="text-3xl font-extrabold first-letter:capitalize">
         {words.join(" ") + " "}
         <span className="font-extrabold text-blue-700 dark:text-blue-400">

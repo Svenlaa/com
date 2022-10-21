@@ -1,9 +1,19 @@
-import { ReactNode } from "react";
+import { ComponentProps, ReactNode } from "react";
 import Footer from "../components/footer";
 import Header from "../components/header";
 
-type Props = { children: ReactNode; header?: ReactNode; footer?: ReactNode };
-const CommonLayout = ({ children, header, footer }: Props) => {
+type Props = {
+  children: ReactNode;
+  header?: ReactNode;
+  footer?: ReactNode;
+} & ComponentProps<"main">;
+const MainLayout = ({
+  children,
+  header,
+  footer,
+  className,
+  ...props
+}: Props) => {
   let head: ReactNode = <Header />;
   if (header === null) head = null;
   if (header) head = header;
@@ -13,12 +23,14 @@ const CommonLayout = ({ children, header, footer }: Props) => {
   if (footer) foot = footer;
 
   return (
-    <>
+    <div className="flex min-h-screen flex-col">
       {head}
-      <main className="px-4">{children}</main>
+      <main className={`flex-grow px-4 ${className}`} {...props}>
+        {children}
+      </main>
       {foot}
-    </>
+    </div>
   );
 };
 
-export default CommonLayout;
+export default MainLayout;
