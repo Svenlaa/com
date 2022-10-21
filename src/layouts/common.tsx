@@ -21,7 +21,4 @@ const CommonLayout = ({ children, header, footer }: Props) => {
   );
 };
 
-// Header undefined === Default Header
-// Header null === No Header
-// Header custom === Custom Header
 export default CommonLayout;
