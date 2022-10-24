@@ -7,13 +7,8 @@ type Props = {
   header?: ReactNode;
   footer?: ReactNode;
 } & ComponentProps<"main">;
-const MainLayout = ({
-  children,
-  header,
-  footer,
-  className,
-  ...props
-}: Props) => {
+const MainLayout = (props: Props) => {
+  const { children, header, footer, className } = props;
   let head: ReactNode = <Header />;
   if (header === null) head = null;
   if (header) head = header;
@@ -25,7 +20,10 @@ const MainLayout = ({
   return (
     <div className="flex min-h-screen flex-col">
       {head}
-      <main className={`flex-grow px-4 ${className}`} {...props}>
+      <main
+        {...props}
+        className={`container mx-auto flex-grow px-4 ${className}`}
+      >
         {children}
       </main>
       {foot}

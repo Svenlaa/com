@@ -1,10 +1,14 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import {
+  faBars,
+  faCross,
+  faHamburger,
   faHouse,
   faUser,
+  faX,
   IconDefinition,
 } from "@fortawesome/free-solid-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
@@ -19,29 +23,67 @@ type pathType = {
 const paths: pathType[] = [
   { href: "/", label: "Home", icon: faHouse },
   { href: "/account", label: "Account", icon: faUser },
-  {
-    href: "https://github.com/Svenlaa",
-    label: "Github",
-    icon: faGithub,
-    blank: true,
-  },
+  { href: "https://github.com/Svenlaa", label: "Github", icon: faGithub },
 ];
 
 const Header = () => {
   const currPath = useRouter().asPath;
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <header className="flex flex-row gap-4 p-4">
-      {paths.map((path) => (
-        <HeaderLink
-          to={path.href}
-          isActive={path.href === currPath}
-          key={path.href}
-          icon={path.icon ? path.icon : undefined}
-          target={path.blank ? "_blank" : undefined}
+    <header className="container mx-auto ">
+      <div className="mx-auto flex w-full flex-row justify-between bg-white p-4 dark:bg-black md:bg-inherit">
+        <Link href="/">
+          <a className="my-auto text-3xl duration-200 ease-in hover:text-prime-900 dark:hover:text-prime-200">
+            Svenlaa
+          </a>
+        </Link>
+
+        {/* Section with hamburger for smaller screens */}
+        <button
+          className="translate block aspect-square rounded-full bg-prime-500 text-3xl text-white md:hidden"
+          onClick={() => setIsOpen(!isOpen)}
         >
-          {path.label}
-        </HeaderLink>
-      ))}
+          <FontAwesomeIcon
+            icon={isOpen ? faX : faBars}
+            className="aspect-square scale-90 p-2"
+          />
+        </button>
+
+        {/* Section that shows tabs on larger screens */}
+        <div className="hidden gap-4 overflow-x-scroll md:flex md:flex-row">
+          {paths.map((path) => (
+            <HeaderLink
+              to={path.href}
+              isActive={path.href === currPath}
+              key={path.href}
+              icon={path.icon ? path.icon : undefined}
+              target={path.blank ? "_blank" : undefined}
+            >
+              {path.label}
+            </HeaderLink>
+          ))}
+        </div>
+      </div>
+
+      {/* Dropdown for smaller screens */}
+      <div
+        className={`${
+          isOpen ? "flex flex-col" : "hidden"
+        } mb-4 rounded-b-xl bg-white px-4 drop-shadow-xl dark:bg-gray-900 md:hidden`}
+      >
+        {paths.map((path) => (
+          <HeaderLink
+            to={path.href}
+            isActive={path.href === currPath}
+            key={path.href}
+            icon={path.icon ? path.icon : undefined}
+            target={path.blank ? "_blank" : undefined}
+          >
+            {path.label}
+          </HeaderLink>
+        ))}
+      </div>
     </header>
   );
 };
@@ -53,18 +95,21 @@ type LinkProps = {
   icon?: IconDefinition;
   target?: string;
 };
-const HeaderLink = ({ to, children, isActive, icon, target }: LinkProps) => {
+const HeaderLink = (props: LinkProps) => {
+  const { to, children } = props;
   return (
     <Link href={to}>
       <a
         className={`${
-          isActive
-            ? "bg-prime-500 text-white"
-            : "transition-text bg-white text-gray-800 delay-75 duration-500 ease-out hover:bg-prime-500 hover:text-white dark:bg-gray-800 dark:text-gray-400"
-        } rounded-md p-2 px-3 text-lg`}
-        target={target || "_self"}
+          props.isActive
+            ? "text-prime-500 md:bg-prime-500 md:text-white"
+            : "transition-text delay-75 duration-500 ease-out hover:text-prime-500 md:bg-white md:text-gray-800 md:hover:bg-prime-500 md:hover:text-white md:dark:bg-gray-800 md:dark:text-gray-400"
+        }  whitespace-nowrap rounded-md p-2 px-3 text-lg`}
+        target={props.target || "_self"}
       >
-        {icon ? <FontAwesomeIcon className="pr-2" icon={icon} /> : null}
+        {props.icon ? (
+          <FontAwesomeIcon className="pr-2" icon={props.icon} />
+        ) : null}
         {children}
       </a>
     </Link>
