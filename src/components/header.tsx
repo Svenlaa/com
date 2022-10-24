@@ -4,14 +4,11 @@ import { useRouter } from "next/router";
 import { ReactNode, useState } from "react";
 import {
   faBars,
-  faCross,
-  faHamburger,
   faHouse,
   faUser,
   faX,
   IconDefinition,
 } from "@fortawesome/free-solid-svg-icons";
-import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 type pathType = {
   readonly href: string;
@@ -23,7 +20,6 @@ type pathType = {
 const paths: pathType[] = [
   { href: "/", label: "Home", icon: faHouse },
   { href: "/account", label: "Account", icon: faUser },
-  { href: "https://github.com/Svenlaa", label: "Github", icon: faGithub },
 ];
 
 const Header = () => {
@@ -102,7 +98,7 @@ const HeaderLink = (props: LinkProps) => {
       <a
         className={`${
           props.isActive
-            ? "text-prime-500 md:bg-prime-500 md:text-white"
+            ? "text-prime-500 hover:bg-prime-600 md:bg-prime-500 md:text-white"
             : "transition-text delay-75 duration-500 ease-out hover:text-prime-500 md:bg-white md:text-gray-800 md:hover:bg-prime-500 md:hover:text-white md:dark:bg-gray-800 md:dark:text-gray-400"
         }  whitespace-nowrap rounded-md p-2 px-3 text-lg`}
         target={props.target || "_self"}

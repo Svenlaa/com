@@ -2,19 +2,30 @@ import { GetStaticProps } from "next";
 import { useTranslations } from "next-intl";
 import pick from "lodash/pick";
 import CommonLayout from "../layouts/common";
+import {
+  faGithub,
+  faLinkedin,
+  faTwitter,
+} from "@fortawesome/free-brands-svg-icons";
+import ProfileCard from "../components/profileCard";
+
+const profile = {
+  name: "Sven Lammertink",
+  pictureUrl: "/Sven.jpg",
+  role: "Software developer",
+  links: [
+    { href: "https://github.com/Svenlaa", icon: faGithub },
+    { href: "https://www.linkedin.com/in/svenlaa", icon: faLinkedin },
+    { href: "https://twitter.com/Svenlaa", icon: faTwitter },
+  ],
+};
 
 const HomePage = () => {
   const t = useTranslations("Home");
 
-  const words = t("greeting").split(" ");
-  const lastWord = words.pop();
-
   return (
     <CommonLayout className="flex h-full items-center justify-center">
-      <h1 className="text-3xl font-extrabold first-letter:capitalize">
-        {words.join(" ") + " "}
-        <span className="text-prime-600 dark:text-prime-400">{lastWord}</span>
-      </h1>
+      <ProfileCard ctaMessage={t("call_to_action")} profile={profile} />
     </CommonLayout>
   );
 };
