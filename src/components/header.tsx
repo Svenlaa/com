@@ -47,7 +47,7 @@ const Header = () => {
         </button>
 
         {/* Section that shows tabs on larger screens */}
-        <div className="hidden gap-4 overflow-x-scroll md:flex md:flex-row">
+        <div className="hidden gap-4 md:flex md:flex-row">
           {paths.map((path) => (
             <HeaderLink
               to={path.href}
