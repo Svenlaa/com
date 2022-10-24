@@ -9,6 +9,7 @@ module.exports = {
     extend: {
       colors: {
         prime: colors.fuchsia,
+        neutral: colors.slate,
       },
     },
   },
