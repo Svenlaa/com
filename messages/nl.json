@@ -1,6 +1,7 @@
 {
   "Home": {
-    "call_to_action": "Klik op de knop"
+    "cta_label": "Klik op de knop",
+    "cta_message": "Komt binnenkort..."
   },
   "Account": {
     "welcome": "welkom",

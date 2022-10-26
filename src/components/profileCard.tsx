@@ -12,9 +12,12 @@ export type Profile = {
 
 type ProfileCardProps = {
   profile: Profile;
-  ctaMessage: string;
+  cta: {
+    label: string;
+    message: string;
+  };
 };
-const ProfileCard = ({ ctaMessage, profile }: ProfileCardProps) => {
+const ProfileCard = ({ cta, profile }: ProfileCardProps) => {
   return (
     <div className="m-4 flex flex-col rounded-2xl bg-white p-8 pb-4 dark:bg-black">
       <span className="relative mx-auto h-72 w-72">
@@ -38,8 +41,11 @@ const ProfileCard = ({ ctaMessage, profile }: ProfileCardProps) => {
           ))}
         </div>
       )}
-      <button className="mx-auto my-2 w-min whitespace-nowrap rounded-full bg-emerald-500 py-2 px-4 text-2xl font-extrabold text-white hover:bg-emerald-600">
-        {ctaMessage}
+      <button
+        className="mx-auto my-2 w-min whitespace-nowrap rounded-full bg-emerald-500 py-2 px-4 text-2xl font-extrabold text-white hover:bg-emerald-600"
+        onClick={() => window.alert(cta.message)}
+      >
+        {cta.label}
       </button>
     </div>
   );

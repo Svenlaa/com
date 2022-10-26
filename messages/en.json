@@ -1,6 +1,7 @@
 {
   "Home": {
-    "call_to_action": "Click the button"
+    "cta_label": "Click the button",
+    "cta_message": "Coming soon..."
   },
   "Account": {
     "welcome": "welcome",
