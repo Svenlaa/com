@@ -23,7 +23,7 @@ const MainLayout = (props: Props) => {
       {head}
       <main
         {...props}
-        className={`container mx-auto h-full flex-grow px-4 ${className}`}
+        className={`mx-auto h-full flex-grow px-4 md:container ${className}`}
       >
         {children}
       </main>

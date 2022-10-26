@@ -27,7 +27,7 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="container mx-auto ">
+    <header className="mx-auto w-screen md:container">
       <div className="mx-auto flex w-full flex-row justify-between bg-white p-4 dark:bg-black md:bg-inherit">
         <Link href="/">
           <a className="my-auto text-3xl duration-200 ease-in hover:text-prime-900 dark:hover:text-prime-200">
@@ -66,7 +66,7 @@ const Header = () => {
       <div
         className={`${
           isOpen ? "flex flex-col" : "hidden"
-        } absolute w-screen rounded-b-xl bg-white px-4 drop-shadow-xl dark:bg-gray-900 md:hidden`}
+        } absolute w-full rounded-b-xl bg-white px-4 drop-shadow-xl dark:bg-gray-900 md:hidden`}
       >
         {paths.map((path) => (
           <HeaderLink
