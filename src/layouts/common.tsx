@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { ComponentProps, ReactNode } from "react";
 import Footer from "../components/footer";
 import Header from "../components/header";
