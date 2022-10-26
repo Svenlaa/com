@@ -98,7 +98,7 @@ const HeaderLink = (props: LinkProps) => {
       <a
         className={`${
           props.isActive
-            ? "text-prime-500 hover:bg-prime-600 md:bg-prime-500 md:text-white"
+            ? "text-prime-500 md:bg-prime-500 md:text-white md:hover:bg-prime-600"
             : "transition-text delay-75 duration-500 ease-out hover:text-prime-500 md:bg-white md:text-gray-800 md:hover:bg-prime-500 md:hover:text-white md:dark:bg-gray-800 md:dark:text-gray-400"
         }  whitespace-nowrap rounded-md p-2 px-3 text-lg`}
         target={props.target || "_self"}
