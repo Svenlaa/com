@@ -66,7 +66,7 @@ const Header = () => {
       <div
         className={`${
           isOpen ? "flex flex-col" : "hidden"
-        } mb-4 rounded-b-xl bg-white px-4 drop-shadow-xl dark:bg-gray-900 md:hidden`}
+        } absolute w-screen rounded-b-xl bg-white px-4 drop-shadow-xl dark:bg-gray-900 md:hidden`}
       >
         {paths.map((path) => (
           <HeaderLink

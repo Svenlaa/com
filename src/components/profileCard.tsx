@@ -51,8 +51,11 @@ type pathType = {
 };
 const ProfileLink = (props: pathType) => {
   return (
-    <Link href={props.href} target="_blank">
-      <a className="rounded-md bg-gray-200 p-1 px-2 text-lg text-gray-800 hover:bg-gray-300 dark:bg-gray-800 dark:text-gray-400 hover:dark:bg-gray-700 md:hover:bg-prime-500 md:hover:text-white">
+    <Link href={props.href}>
+      <a
+        target="_blank"
+        className="rounded-md bg-gray-200 p-1 px-2 text-lg text-gray-800 hover:bg-gray-300 dark:bg-gray-800 dark:text-gray-400 hover:dark:bg-gray-700 md:hover:bg-prime-500 md:hover:text-white"
+      >
         <FontAwesomeIcon icon={props.icon} className="aspect-square" />
       </a>
     </Link>
