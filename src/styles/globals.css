@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 body {
-  @apply min-h-screen bg-[#ffe4e1] text-black dark:bg-black dark:text-white;
+  @apply min-h-screen bg-[#ffe4e1] text-black dark:bg-[#1d0002] dark:text-white;
 }
