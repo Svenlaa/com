@@ -8,6 +8,7 @@ import {
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 import ProfileCard from "../components/profileCard";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 const profile = {
   name: "Sven Lammertink",
@@ -17,6 +18,7 @@ const profile = {
     { href: "https://github.com/Svenlaa", icon: faGithub },
     { href: "https://www.linkedin.com/in/svenlaa", icon: faLinkedin },
     { href: "https://twitter.com/Svenlaa", icon: faTwitter },
+    { href: "mailto:sven.lammertink@homtail.com", icon: faEnvelope },
   ],
 };
 
