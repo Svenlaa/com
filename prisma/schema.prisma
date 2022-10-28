@@ -23,7 +23,7 @@ model Example {
 // Necessary for Next auth
 model Account {
   id                String  @id @default(cuid())
-  userId            String
+  userId            String  @unique
   type              String
   provider          String
   providerAccountId String
@@ -35,7 +35,6 @@ model Account {
   id_token          String? @db.Text
   session_state     String?
   user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  runs              Run[]
 
   @@unique([provider, providerAccountId])
 }
@@ -56,6 +55,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  runs          Run[]
 }
 
 model VerificationToken {
@@ -68,7 +68,7 @@ model VerificationToken {
 
 model Run {
   id        String  @id @default(cuid())
-  runner    Account @relation(fields: [runnerId], references: [id])
+  runner    User    @relation(fields: [runnerId], references: [id])
   runnerId  String  
   distance  Int     @db.UnsignedMediumInt
   date      String  @db.VarChar(10)

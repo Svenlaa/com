@@ -21,8 +21,8 @@ yarn dev
 
 ## What's next?
 
-- Running Tab
 - Resume
 - Spotify - Now Playing (Footer)
+- Automatically post to Twitter once a run is added
 - Books Tab **?**
 - Projects **?**

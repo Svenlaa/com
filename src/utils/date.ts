@@ -10,7 +10,19 @@ export const getWeek = (date: Date) => dayjs(date).isoWeek();
 export const getStartOfWeek = (date: Date) =>
   dayjs(date).startOf("isoWeek").toDate();
 
-export const formatDate = (date: Date) => date.toISOString().split("T")[0];
+export const formatDate = (date: Date) =>
+  date.toISOString().split("T")[0] ?? "";
+
+// Doesn't always work if the week is in the next/last year
+export const formatYearWeek = (date: Date) => {
+  let year = date.getFullYear();
+  const week = getWeek(date);
+  const month = date.getMonth();
+  if (week === 1 && month === 11) year++;
+  if (week > 50 && month === 0) year--;
+
+  return `${year}w${week}`;
+};
 
 export const getFirstDayOfYear = (year: number) => {
   const date = new Date(`${year}-1-1`);
