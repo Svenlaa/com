@@ -5,24 +5,28 @@ import { ReactNode, useState } from "react";
 import {
   faBars,
   faHouse,
+  faRunning,
   faUser,
   faX,
   IconDefinition,
 } from "@fortawesome/free-solid-svg-icons";
+import { useTranslations } from "next-intl";
 
 type pathType = {
-  readonly href: string;
-  readonly label: string;
-  readonly icon?: IconDefinition;
-  readonly blank?: boolean;
+  href: string;
+  label: keyof IntlMessages["Header"];
+  icon?: IconDefinition;
 };
 
-const paths: pathType[] = [
-  { href: "/", label: "Home", icon: faHouse },
-  { href: "/account", label: "Account", icon: faUser },
-];
+const paths: Readonly<pathType[]> = [
+  { href: "/", label: "home", icon: faHouse },
+  { href: "/running", label: "running", icon: faRunning },
+  { href: "/account", label: "account", icon: faUser },
+] as const;
 
 const Header = () => {
+  const t = useTranslations("Header");
+
   const currPath = useRouter().asPath;
   const [isOpen, setIsOpen] = useState(false);
 
@@ -54,9 +58,8 @@ const Header = () => {
               isActive={path.href === currPath}
               key={path.href}
               icon={path.icon ? path.icon : undefined}
-              target={path.blank ? "_blank" : undefined}
             >
-              {path.label}
+              {t(path.label)}
             </HeaderLink>
           ))}
         </div>
@@ -74,9 +77,8 @@ const Header = () => {
             isActive={path.href === currPath}
             key={path.href}
             icon={path.icon ? path.icon : undefined}
-            target={path.blank ? "_blank" : undefined}
           >
-            {path.label}
+            {t(path.label)}
           </HeaderLink>
         ))}
       </div>
@@ -84,12 +86,13 @@ const Header = () => {
   );
 };
 
+Header.messages = ["Header"];
+
 type LinkProps = {
   to: string;
   children: ReactNode;
   isActive?: boolean;
   icon?: IconDefinition;
-  target?: string;
 };
 const HeaderLink = (props: LinkProps) => {
   const { to, children } = props;
@@ -101,7 +104,6 @@ const HeaderLink = (props: LinkProps) => {
             ? "text-prime-500 md:bg-prime-500 md:text-white md:hover:bg-prime-600"
             : "transition-text delay-75 duration-500 ease-out hover:text-prime-500 md:bg-white md:text-gray-800 md:hover:bg-prime-500 md:hover:text-white md:dark:bg-gray-800 md:dark:text-gray-400"
         }  whitespace-nowrap rounded-md p-2 px-3 text-lg`}
-        target={props.target || "_self"}
       >
         {props.icon ? (
           <FontAwesomeIcon className="pr-2" icon={props.icon} />

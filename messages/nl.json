@@ -1,4 +1,9 @@
 {
+  "Header": {
+    "home": "Home",
+    "running": "Hardlopen",
+    "account": "Account"
+  },
   "Home": {
     "cta_label": "Klik op de knop",
     "cta_message": "Komt binnenkort..."

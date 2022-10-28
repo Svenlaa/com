@@ -9,6 +9,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import ProfileCard from "../components/profileCard";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import MainLayout from "../layouts/common";
 
 const profile = {
   name: "Sven Lammertink",
@@ -35,7 +36,8 @@ const HomePage = () => {
   );
 };
 
-HomePage.messages = ["Home"];
+HomePage.messages = ["Home", ...MainLayout.messages];
+export default HomePage;
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => ({
   props: {
@@ -45,5 +47,3 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => ({
     ),
   },
 });
-
-export default HomePage;

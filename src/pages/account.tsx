@@ -3,6 +3,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import pick from "lodash/pick";
 import CommonLayout from "../layouts/common";
+import MainLayout from "../layouts/common";
 
 const AccountPage = () => {
   const { data: session } = useSession();
@@ -23,8 +24,7 @@ const AccountPage = () => {
   );
 };
 
-AccountPage.messages = ["Account"];
-
+AccountPage.messages = ["Account", MainLayout.messages];
 export default AccountPage;
 
 const Welcome = ({ name }: { name?: string | null }) => {

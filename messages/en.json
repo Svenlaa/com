@@ -1,4 +1,7 @@
 {
+  "Header": {
+    "running": "Running"
+  },
   "Home": {
     "cta_label": "Click the button",
     "cta_message": "Coming soon..."

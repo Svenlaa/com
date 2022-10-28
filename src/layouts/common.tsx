@@ -18,7 +18,7 @@ const MainLayout = (props: Props) => {
   if (footer) foot = footer;
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="relative flex min-h-screen w-full flex-col">
       {head}
       <main
         {...props}
@@ -31,4 +31,5 @@ const MainLayout = (props: Props) => {
   );
 };
 
+MainLayout.messages = [...Header.messages];
 export default MainLayout;
