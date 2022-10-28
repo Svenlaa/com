@@ -21,7 +21,6 @@ yarn dev
 
 ## What's next?
 
-- Devcontainer support
 - Running Tab
 - Resume
 - Spotify - Now Playing (Footer)
