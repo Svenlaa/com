@@ -1,6 +1,8 @@
 {
   "Header": {
-    "running": "Running"
+    "home": "Home",
+    "running": "Running",
+    "account": "Account"
   },
   "Home": {
     "cta_label": "Click the button",
