@@ -56,7 +56,7 @@ const RunningPage = () => {
   });
 
   return (
-    <MainLayout className="mx-auto max-w-lg py-4 px-0">
+    <MainLayout className="mx-auto max-w-lg py-4 px-0 md:max-w-xl">
       <div className="mx-2 rounded-md bg-black/20 p-1 dark:bg-white/20">
         <div className="flex flex-row justify-between text-black/80">
           <button onClick={() => setYear(year - 1)} className="mx-4 ">
