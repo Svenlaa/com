@@ -58,22 +58,9 @@ const RunningPage = () => {
   return (
     <MainLayout className="mx-auto max-w-lg py-4 px-0 md:max-w-xl">
       <div className="mx-2 rounded-md bg-black/20 p-1 dark:bg-white/20">
-        <div className="flex flex-row justify-between text-black/80">
-          <button onClick={() => setYear(year - 1)} className="mx-4 ">
-            <FontAwesomeIcon icon={faArrowAltCircleLeft} />
-          </button>
-          <h1 className="px-2 py-1 pb-0 font-bold dark:text-gray-200">
-            {yearlyDistance}km in {year}
-          </h1>
-          <button
-            onClick={() => setYear(year + 1)}
-            disabled={new Date().getFullYear() <= year}
-            className="mx-4 disabled:text-black/10"
-          >
-            <FontAwesomeIcon icon={faArrowAltCircleRight} />
-          </button>
-        </div>
-
+        <h1 className="px-2 py-1 pb-0 text-center font-bold text-black/80 dark:text-gray-200">
+          {yearlyDistance}km in {year}
+        </h1>
         <div className="mx- grid grid-cols-12 gap-2 rounded-md p-2 md:gap-2">
           {weeks.map((i) => (
             <ActivityBlock key={i.block} grade={i.grade || 0} />
