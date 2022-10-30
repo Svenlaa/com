@@ -1,14 +1,8 @@
-import {
-  faArrowAltCircleLeft,
-  faArrowAltCircleRight,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { pick } from "lodash";
 import { GetStaticProps } from "next";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { useState } from "react";
 import ActivityBlock from "../components/ActivityBlock";
 import ActivityItem from "../components/ActivityItem";
 import MainLayout from "../layouts/common";
@@ -21,10 +15,14 @@ type Prop = {
 };
 
 const RunningPage = () => {
-  const [year, setYear] = useState(2022);
+  const year = 2022;
   const amountOfWeeks = getWeeksInYear(year);
   const weeks: Prop[] = [];
   const { isLoading, data: runs } = trpc.running.getAll.useQuery();
+  const deleteMutation = trpc.running.deleteItem.useMutation();
+  const onDelete = (runId: string) => {
+    deleteMutation.mutate(runId);
+  };
   const { data: session } = useSession();
   const t = useTranslations("Running");
 
@@ -76,7 +74,12 @@ const RunningPage = () => {
           </Link>
         )}
         {runs?.map((run) => (
-          <ActivityItem item={run} key={run.id} />
+          <ActivityItem
+            item={run}
+            showDelete={session?.user?.id === run.runnerId}
+            key={run.id}
+            onDelete={onDelete}
+          />
         ))}
       </div>
     </MainLayout>

@@ -22,6 +22,7 @@ export const runningRouter = router({
           distance: true,
           id: true,
           yearWeek: true,
+          runnerId: true,
         },
         orderBy: {
           date: "desc",
@@ -48,5 +49,20 @@ export const runningRouter = router({
         },
       });
       return yes;
+    }),
+  deleteItem: protectedProcedure
+    .input(z.string())
+    .mutation(async ({ input, ctx }) => {
+      const run = input;
+      const runnerId = ctx.session.user.id;
+      const dbRunnerId = await prisma?.run.findUnique({
+        where: { id: run },
+        select: { runnerId: true },
+      });
+      if (dbRunnerId?.runnerId !== runnerId)
+        throw Error("You are not authorized to delete this run");
+      return await prisma?.run.delete({
+        where: { id: run },
+      });
     }),
 });
