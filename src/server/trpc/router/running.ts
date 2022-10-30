@@ -55,13 +55,13 @@ export const runningRouter = router({
     .mutation(async ({ input, ctx }) => {
       const run = input;
       const runnerId = ctx.session.user.id;
-      const dbRunnerId = await prisma?.run.findUnique({
+      const dbRunnerId = await ctx.prisma.run.findUnique({
         where: { id: run },
         select: { runnerId: true },
       });
       if (dbRunnerId?.runnerId !== runnerId)
         throw Error("You are not authorized to delete this run");
-      return await prisma?.run.delete({
+      return await ctx.prisma.run.delete({
         where: { id: run },
       });
     }),
