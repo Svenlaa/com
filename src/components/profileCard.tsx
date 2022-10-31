@@ -37,12 +37,17 @@ const ProfileCard = ({ cta, profile }: ProfileCardProps) => {
       {profile.links && (
         <div className="my-2 flex flex-row justify-center gap-2">
           {profile.links.map((l) => (
-            <ProfileLink href={l.href} icon={l.icon} key={l.href} />
+            <ProfileLink
+              href={l.href}
+              icon={l.icon}
+              key={l.href}
+              label={l.label}
+            />
           ))}
         </div>
       )}
       <button
-        className="mx-auto my-2 w-min whitespace-nowrap rounded-full bg-emerald-500 py-2 px-4 text-2xl font-extrabold text-white hover:bg-emerald-600"
+        className="mx-auto my-2 w-min whitespace-nowrap rounded-full bg-prime-600 py-2 px-4 text-2xl font-extrabold text-white hover:bg-prime-700"
         onClick={() => window.alert(cta.message)}
       >
         {cta.label}
@@ -54,13 +59,15 @@ const ProfileCard = ({ cta, profile }: ProfileCardProps) => {
 type pathType = {
   readonly href: string;
   readonly icon: IconDefinition;
+  readonly label: string;
 };
 const ProfileLink = (props: pathType) => {
   return (
     <Link href={props.href}>
       <a
         target="_blank"
-        className="rounded-md bg-gray-200 p-1 px-2 text-lg text-gray-800 hover:bg-gray-300 dark:bg-gray-800 dark:text-gray-400 hover:dark:bg-gray-700 md:hover:bg-prime-500 md:hover:text-white"
+        aria-label={props.label}
+        className="rounded-md bg-gray-200 p-1 px-2 text-lg text-gray-800 hover:bg-gray-300 dark:bg-gray-800 dark:text-gray-400 md:hover:bg-prime-700 md:hover:text-white"
       >
         <FontAwesomeIcon icon={props.icon} className="aspect-square" />
       </a>

@@ -16,10 +16,18 @@ const profile = {
   pictureUrl: "/Sven.jpg",
   role: "Software developer",
   links: [
-    { href: "https://github.com/Svenlaa", icon: faGithub },
-    { href: "https://www.linkedin.com/in/svenlaa", icon: faLinkedin },
-    { href: "https://twitter.com/Svenlaa", icon: faTwitter },
-    { href: "mailto:sven.lammertink@homtail.com", icon: faEnvelope },
+    { href: "https://github.com/Svenlaa", icon: faGithub, label: "github" },
+    {
+      href: "https://www.linkedin.com/in/svenlaa",
+      icon: faLinkedin,
+      label: "LinkedIn",
+    },
+    { href: "https://twitter.com/Svenlaa", icon: faTwitter, label: "twitter" },
+    {
+      href: "mailto:sven.lammertink@homtail.com",
+      icon: faEnvelope,
+      label: "email",
+    },
   ],
 };
 

@@ -26,7 +26,7 @@ const AddRunPage = () => {
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
     const timeArr = time.split(":") as [string, string];
-    if (!distance) return;
+    if (!distance && !time) return;
     createRun.mutate(
       {
         distance: +distance * 1000,

@@ -65,13 +65,17 @@ const RunningPage = () => {
     <MainLayout className="mx-auto max-w-lg py-4 px-0 md:max-w-xl">
       <div className="mx-2 rounded-md bg-black/20 p-1 dark:bg-white/20">
         <div className="mx-4 flex flex-row justify-between text-black/75  dark:text-white/75">
-          <button onClick={() => setYear(year - 1)}>
+          <button
+            onClick={() => setYear(year - 1)}
+            aria-label={t("previous_year")}
+          >
             <FontAwesomeIcon icon={faArrowLeft} />
           </button>
           <h1 className="px-2 py-1 pb-0 text-center font-bold text-black/80 dark:text-gray-200">
             {yearlyDistance}km in {year}
           </h1>
           <button
+            aria-label={t("next_year")}
             onClick={() => setYear(year + 1)}
             disabled={year >= new Date().getFullYear()}
             className=" disabled:text-black/25 dark:disabled:text-white/25"
@@ -80,12 +84,8 @@ const RunningPage = () => {
           </button>
         </div>
         <div className="mx- grid grid-cols-12 gap-2 rounded-md p-2 md:gap-2">
-          {weeks.map((week, i) => (
-            <ActivityBlock
-              key={week.block}
-              week={i + 1}
-              grade={week.grade || 0}
-            />
+          {weeks.map((week) => (
+            <ActivityBlock key={week.block} grade={week.grade || 0} />
           ))}
         </div>
       </div>

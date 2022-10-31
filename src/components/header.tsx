@@ -39,7 +39,8 @@ const Header = () => {
 
         {/* Section with hamburger for smaller screens */}
         <button
-          className="translate block aspect-square rounded-full bg-prime-500 text-3xl text-white md:hidden"
+          className="translate block aspect-square rounded-full bg-prime-600 text-3xl text-white md:hidden"
+          aria-label="hamburger menu"
           onClick={() => setIsOpen(!isOpen)}
         >
           <FontAwesomeIcon
@@ -99,9 +100,9 @@ const HeaderLink = (props: LinkProps) => {
       <a
         className={`${
           props.isActive
-            ? "text-prime-500 md:bg-prime-500 md:text-white md:hover:bg-prime-600"
-            : "transition-text delay-75 duration-500 ease-out hover:text-prime-500 md:bg-white md:text-gray-800 md:hover:bg-prime-500 md:hover:text-white md:dark:bg-gray-800 md:dark:text-gray-400"
-        }  whitespace-nowrap rounded-md p-2 px-3 text-lg`}
+            ? " text-prime-700 md:bg-prime-700 md:text-white md:hover:bg-prime-600"
+            : "transition-text delay-75 duration-500 ease-out hover:text-prime-700 md:bg-white md:text-gray-800 md:hover:bg-prime-700 md:hover:text-white md:dark:bg-gray-800 md:dark:text-gray-400"
+        } whitespace-nowrap rounded-md p-2 px-3 text-xl`}
       >
         {props.icon ? (
           <FontAwesomeIcon className="pr-2" icon={props.icon} />
