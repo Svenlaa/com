@@ -1,8 +1,11 @@
+import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { pick } from "lodash";
 import { GetStaticProps } from "next";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import { useState } from "react";
 import ActivityBlock from "../components/ActivityBlock";
 import ActivityItem from "../components/ActivityItem";
 import MainLayout from "../layouts/common";
@@ -15,11 +18,12 @@ type Prop = {
 };
 
 const RunningPage = () => {
-  const year = 2022;
+  const [year, setYear] = useState(new Date().getFullYear());
   const amountOfWeeks = getWeeksInYear(year);
   const weeks: Prop[] = [];
   const utils = trpc.useContext();
-  const { isLoading, data: runs } = trpc.running.getAll.useQuery();
+  const getRunsQuery = trpc.running.getAll;
+  const { isLoading, data: runs } = getRunsQuery.useQuery(year);
   const deleteMutation = trpc.running.deleteItem.useMutation();
   const onDelete = (runId: string) => {
     deleteMutation.mutate(runId, {
@@ -61,9 +65,21 @@ const RunningPage = () => {
   return (
     <MainLayout className="mx-auto max-w-lg py-4 px-0 md:max-w-xl">
       <div className="mx-2 rounded-md bg-black/20 p-1 dark:bg-white/20">
-        <h1 className="px-2 py-1 pb-0 text-center font-bold text-black/80 dark:text-gray-200">
-          {yearlyDistance}km in {year}
-        </h1>
+        <div className="mx-4 flex flex-row justify-between text-black/75  dark:text-white/75">
+          <button onClick={() => setYear(year - 1)}>
+            <FontAwesomeIcon icon={faArrowLeft} />
+          </button>
+          <h1 className="px-2 py-1 pb-0 text-center font-bold text-black/80 dark:text-gray-200">
+            {yearlyDistance}km in {year}
+          </h1>
+          <button
+            onClick={() => setYear(year + 1)}
+            disabled={year >= new Date().getFullYear()}
+            className=" disabled:text-black/25 dark:disabled:text-white/25"
+          >
+            <FontAwesomeIcon icon={faArrowRight} />
+          </button>
+        </div>
         <div className="mx- grid grid-cols-12 gap-2 rounded-md p-2 md:gap-2">
           {weeks.map((week, i) => (
             <ActivityBlock
