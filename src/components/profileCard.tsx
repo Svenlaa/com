@@ -26,6 +26,7 @@ const ProfileCard = ({ cta, profile }: ProfileCardProps) => {
           alt={profile.name}
           layout="fill"
           className="aspect-square rounded-full"
+          priority
         />
       </span>
       <span className="mx-auto mt-4 text-center text-2xl font-bold">

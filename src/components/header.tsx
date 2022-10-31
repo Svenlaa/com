@@ -105,7 +105,7 @@ const HeaderLink = (props: LinkProps) => {
         } whitespace-nowrap rounded-md p-2 px-3 text-xl`}
       >
         {props.icon ? (
-          <FontAwesomeIcon className="pr-2" icon={props.icon} />
+          <FontAwesomeIcon className="text-md pr-2" icon={props.icon} />
         ) : null}
         {children}
       </a>

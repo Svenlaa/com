@@ -1,6 +1,9 @@
 import { ComponentProps, ReactNode } from "react";
 import Footer from "../components/footer";
 import Header from "../components/header";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+import { config } from "@fortawesome/fontawesome-svg-core";
+config.autoAddCss = false; /* eslint-disable import/first */
 
 type Props = {
   children: ReactNode;
