@@ -18,7 +18,7 @@ const AddRunPage = () => {
   });
 
   const [date, setDate] = useState("");
-  const [distance, setDistance] = useState<number>();
+  const [distance, setDistance] = useState("");
   const [time, setTime] = useState("");
 
   const t = useTranslations("RunningAdd");
@@ -26,13 +26,21 @@ const AddRunPage = () => {
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
     const timeArr = time.split(":") as [string, string];
-    const t = +timeArr[0] * 60 + +timeArr[1];
     if (!distance) return;
-    createRun.mutate({
-      distance: distance * 1000,
-      date: date || undefined,
-      time: t || null,
-    });
+    createRun.mutate(
+      {
+        distance: +distance * 1000,
+        date: date || undefined,
+        time: +timeArr[0] * 60 + +timeArr[1],
+      },
+      {
+        onSuccess: () => {
+          setDate("");
+          setDistance("");
+          setTime("");
+        },
+      }
+    );
   };
 
   return (
@@ -67,11 +75,11 @@ const AddRunPage = () => {
             <input
               className="w-full rounded-sm px-1 text-black"
               type="number"
-              value={distance + ""}
+              value={distance}
               step="0.05"
               min="1"
               max="1000"
-              onChange={(e) => setDistance(+e.target.value)}
+              onChange={(e) => setDistance(e.target.value)}
               required
             />
             <span className="ml-1 text-lg font-bold leading-tight">km</span>

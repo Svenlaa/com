@@ -1,16 +1,18 @@
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import {
+  faClock,
+  faGaugeHigh,
+  faRoute,
+  faTrash,
+  IconDefinition,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Run } from "@prisma/client";
 import { useRouter } from "next/router";
-import { trpc } from "../utils/trpc";
+import { ReactNode } from "react";
+import { formatToTimeString } from "../utils/time";
 
 type Props = {
-  item: {
-    date: string;
-    distance: number;
-    id: string;
-    yearWeek: string;
-    runnerId: string;
-  };
+  item: Run;
   showDelete?: boolean;
   onDelete?: (runId: string) => void;
 };
@@ -21,23 +23,46 @@ const ActivityItem = ({ item, showDelete, onDelete = () => null }: Props) => {
     dateStyle: "full",
   });
   return (
-    <div className="my-4 mx-auto flex w-4/6 flex-row justify-between ">
-      <p className="text-l font-bold text-prime-600 dark:text-prime-400">
-        {dateString}
-      </p>
-      <div>
-        <span>{item.distance / 1000}km</span>
+    <div className="my-4 mx-auto flex w-4/6 flex-col justify-between ">
+      <div className="flex flex-row justify-between text-lg">
+        <p className="font-bold text-prime-700 dark:text-prime-400">
+          {dateString}
+        </p>
         {showDelete && (
           <button
-            className="ml-2 text-red-600 hover:text-red-500 dark:text-red-400"
+            className="text-red-600 hover:text-red-500 dark:text-red-400"
             onClick={() => onDelete(item.id)}
           >
             <FontAwesomeIcon icon={faTrash} />
           </button>
         )}
       </div>
+      <div className="mt-1 flex flex-row justify-start">
+        {item.time && (
+          <Detail icon={faClock}>{formatToTimeString(item.time)}</Detail>
+        )}
+        <Detail icon={faRoute}>{item.distance / 1000}km</Detail>
+        {item.time && item.distance && (
+          <Detail icon={faGaugeHigh}>
+            {(item.distance / 1000 / (item.time / 3600)).toFixed(1)} km/h
+          </Detail>
+        )}
+      </div>
     </div>
   );
 };
+
+type DetailProps = { children: ReactNode; icon?: IconDefinition };
+const Detail = ({ icon, children }: DetailProps) => (
+  <span className="w-[12ch] text-center text-gray-700 dark:text-gray-200">
+    {icon && (
+      <FontAwesomeIcon
+        icon={icon}
+        className="mr-1 text-gray-800 dark:text-gray-100"
+      />
+    )}
+    {children}
+  </span>
+);
 
 export default ActivityItem;

@@ -9,20 +9,12 @@ export const runningRouter = router({
       const user =
         ctx.session?.user ??
         (await ctx.prisma.user.findFirst({ select: { id: true } }));
-
       return await ctx.prisma.run.findMany({
         where: {
           AND: {
             date: { startsWith: input + "" },
             runnerId: user?.id,
           },
-        },
-        select: {
-          date: true,
-          distance: true,
-          id: true,
-          yearWeek: true,
-          runnerId: true,
         },
         orderBy: {
           date: "desc",
@@ -34,14 +26,14 @@ export const runningRouter = router({
       z.object({
         date: z.string().length(10).default(formatDate(new Date())),
         distance: z.number(),
-        time: z.number().nullable(),
+        time: z.number(),
       })
     )
     .mutation(async ({ input, ctx }) => {
       const date = input.date;
       const yearWeek = formatYearWeek(new Date(date));
       const runnerId = ctx.session.user.id;
-      const yes = await ctx.prisma.run.create({
+      return await ctx.prisma.run.create({
         data: {
           date,
           distance: input.distance,
@@ -50,7 +42,6 @@ export const runningRouter = router({
           runnerId,
         },
       });
-      return yes;
     }),
   deleteItem: protectedProcedure
     .input(z.string())
