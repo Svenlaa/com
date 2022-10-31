@@ -21,6 +21,7 @@
   },
   "RunningAdd": {
     "date": "Datum",
+    "time": "Tijd",
     "distance": "Afstand",
     "submit": "Toevoegen"
   }

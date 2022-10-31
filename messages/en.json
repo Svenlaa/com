@@ -21,6 +21,7 @@
   },
   "RunningAdd": {
     "date": "Date",
+    "time": "Time",
     "distance": "Distance",
     "submit": "Add"
   }

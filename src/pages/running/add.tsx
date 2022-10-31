@@ -59,7 +59,7 @@ const AddRunPage = () => {
           />
         </div>
         <div className="my-2 flex w-full flex-row items-center justify-between">
-          <span className="mr-1 font-bold">Tijd</span>
+          <span className="mr-1 font-bold">{t("time")}</span>
           <input
             className="w-[14ch] rounded-sm px-1 leading-relaxed text-black"
             type="text"
