@@ -30,14 +30,14 @@ const ActivityItem = ({ item, showDelete, onDelete = () => null }: Props) => {
         </p>
         {showDelete && (
           <button
-            className="text-red-600 hover:text-red-500 dark:text-red-400"
+            className="ml-1 text-red-600 hover:text-red-500 dark:text-red-400"
             onClick={() => onDelete(item.id)}
           >
             <FontAwesomeIcon icon={faTrash} />
           </button>
         )}
       </div>
-      <div className="mt-1 flex flex-row justify-start">
+      <div className="mt-1 flex flex-row flex-nowrap justify-start">
         {item.time && (
           <Detail icon={faClock}>{formatToTimeString(item.time)}</Detail>
         )}
@@ -54,7 +54,7 @@ const ActivityItem = ({ item, showDelete, onDelete = () => null }: Props) => {
 
 type DetailProps = { children: ReactNode; icon?: IconDefinition };
 const Detail = ({ icon, children }: DetailProps) => (
-  <span className="w-[12ch] text-center text-gray-700 dark:text-gray-200">
+  <span className="mx-2 w-[12ch] whitespace-nowrap text-center text-gray-700 dark:text-gray-200">
     {icon && (
       <FontAwesomeIcon
         icon={icon}

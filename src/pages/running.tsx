@@ -65,8 +65,12 @@ const RunningPage = () => {
           {yearlyDistance}km in {year}
         </h1>
         <div className="mx- grid grid-cols-12 gap-2 rounded-md p-2 md:gap-2">
-          {weeks.map((i) => (
-            <ActivityBlock key={i.block} grade={i.grade || 0} />
+          {weeks.map((week, i) => (
+            <ActivityBlock
+              key={week.block}
+              week={i + 1}
+              grade={week.grade || 0}
+            />
           ))}
         </div>
       </div>
