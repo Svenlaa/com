@@ -35,8 +35,6 @@ const RunningPage = () => {
   const { data: session } = useSession();
   const t = useTranslations("Running");
 
-  if (isLoading) return <p>Loading...</p>;
-
   const yearlyDistance =
     isLoading || !runs
       ? 0
@@ -58,6 +56,7 @@ const RunningPage = () => {
 
   const maxDistance = Math.max(...distances);
   distances.forEach((v, i) => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     weeks[i]!.grade =
       distances[i] === 0 ? 0 : Math.ceil((1 / (maxDistance / v)) * 4);
   });
