@@ -6,9 +6,7 @@ export const runningRouter = router({
   getAll: publicProcedure
     .input(z.number().default(new Date().getFullYear()))
     .query(async ({ input, ctx }) => {
-      const user =
-        ctx.session?.user ??
-        (await ctx.prisma.user.findFirst({ select: { id: true } }));
+      const user = await ctx.prisma.user.findFirst({ select: { id: true } });
       return await ctx.prisma.run.findMany({
         where: {
           AND: {

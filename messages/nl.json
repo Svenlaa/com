@@ -8,14 +8,6 @@
     "cta_label": "Klik op de knop",
     "cta_message": "Komt binnenkort..."
   },
-  "Account": {
-    "welcome": "welkom",
-    "guest_name": "Gebruiker",
-    "sign_out": "Log uit",
-    "sign_in_with": "Log in met ",
-    "signed_in_as": "Je bent ingelogd als ",
-    "not_signed_in": "Je bent niet ingelogd"
-  },
   "Running": {
     "add": "Voeg een loop toe"
   },
