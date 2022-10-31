@@ -15,16 +15,7 @@ type Props = {
   onDelete?: (runId: string) => void;
 };
 
-const ActivityItem = ({ item, showDelete }: Props) => {
-  const deleteRunMutation = trpc.running.deleteItem.useMutation();
-  const utils = trpc.useContext();
-  const onDelete = async (runId: string) => {
-    await deleteRunMutation.mutate(runId, {
-      onSuccess: () => {
-        utils.running.getAll.invalidate();
-      },
-    });
-  };
+const ActivityItem = ({ item, showDelete, onDelete = () => null }: Props) => {
   const router = useRouter();
   const dateString = new Date(item.date).toLocaleDateString(router.locale, {
     dateStyle: "full",

@@ -71,6 +71,7 @@ model Run {
   runner    User    @relation(fields: [runnerId], references: [id])
   runnerId  String  
   distance  Int     @db.UnsignedMediumInt
+  time      Int?    @db.UnsignedMediumInt
   date      String  @db.VarChar(10)
   yearWeek  String  @db.VarChar(7)
 }

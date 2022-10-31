@@ -18,10 +18,15 @@ const RunningPage = () => {
   const year = 2022;
   const amountOfWeeks = getWeeksInYear(year);
   const weeks: Prop[] = [];
+  const utils = trpc.useContext();
   const { isLoading, data: runs } = trpc.running.getAll.useQuery();
   const deleteMutation = trpc.running.deleteItem.useMutation();
   const onDelete = (runId: string) => {
-    deleteMutation.mutate(runId);
+    deleteMutation.mutate(runId, {
+      onSuccess: () => {
+        utils.running.getAll.invalidate();
+      },
+    });
   };
   const { data: session } = useSession();
   const t = useTranslations("Running");

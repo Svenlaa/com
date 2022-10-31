@@ -18,13 +18,21 @@ const AddRunPage = () => {
   });
 
   const [date, setDate] = useState("");
-  const [distance, setDistance] = useState(0);
+  const [distance, setDistance] = useState<number>();
+  const [time, setTime] = useState("");
 
   const t = useTranslations("RunningAdd");
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
-    createRun.mutate({ distance: distance * 1000, date });
+    const timeArr = time.split(":") as [string, string];
+    const t = +timeArr[0] * 60 + +timeArr[1];
+    if (!distance) return;
+    createRun.mutate({
+      distance: distance * 1000,
+      date: date || undefined,
+      time: t || null,
+    });
   };
 
   return (
@@ -33,28 +41,40 @@ const AddRunPage = () => {
         onSubmit={onSubmit}
         className="mx-auto w-4/6 rounded-md bg-black/20 p-4 dark:bg-white/20 md:w-2/6"
       >
-        <div className="flex w-full flex-row items-center justify-between">
+        <div className="my-2 flex w-full flex-row items-center justify-between">
           <span className="mr-1 font-bold">{t("date")}</span>
           <input
-            className="w-[14ch] rounded-sm text-center leading-relaxed text-black"
+            className="w-[14ch] rounded-sm leading-relaxed text-black"
             type="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
           />
         </div>
-        <div className="flex w-full flex-row items-center justify-between">
+        <div className="my-2 flex w-full flex-row items-center justify-between">
+          <span className="mr-1 font-bold">Tijd</span>
+          <input
+            className="w-[14ch] rounded-sm px-1 leading-relaxed text-black"
+            type="text"
+            pattern="[0-9]*:[0-9][0-9]"
+            value={time}
+            onChange={(e) => setTime(e.target.value)}
+            placeholder="121:09"
+          />
+        </div>
+        <div className="my-2 flex w-full flex-row items-center justify-between">
           <span className="mr-1 font-bold">{t("distance")}</span>
           <span className="flex w-[14ch] flex-row items-center">
             <input
-              className="my-2 w-full rounded-sm px-1 text-black"
+              className="w-full rounded-sm px-1 text-black"
               type="number"
               value={distance + ""}
               step="0.05"
               min="1"
               max="1000"
               onChange={(e) => setDistance(+e.target.value)}
+              required
             />
-            <span className="ml-1 text-lg font-bold">km</span>
+            <span className="ml-1 text-lg font-bold leading-tight">km</span>
           </span>
         </div>
 

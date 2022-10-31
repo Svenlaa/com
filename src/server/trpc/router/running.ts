@@ -34,6 +34,7 @@ export const runningRouter = router({
       z.object({
         date: z.string().length(10).default(formatDate(new Date())),
         distance: z.number(),
+        time: z.number().nullable(),
       })
     )
     .mutation(async ({ input, ctx }) => {
@@ -44,6 +45,7 @@ export const runningRouter = router({
         data: {
           date,
           distance: input.distance,
+          time: input.time,
           yearWeek,
           runnerId,
         },
