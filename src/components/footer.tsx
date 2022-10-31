@@ -20,7 +20,7 @@ const Flag = ({ label, code, langName }: FlagProps) => {
 };
 
 const Footer = () => (
-  <footer className="flex w-screen flex-row justify-center bg-gray-300 p-2 dark:bg-gray-700 ">
+  <footer className="flex w-full flex-row justify-center bg-gray-300 p-2 dark:bg-gray-700 ">
     <div className="flex w-5/6 flex-row justify-around md:w-3/6">
       <Flag label="🇳🇱" code="nl" langName="Nederlands" />
       <Flag label="🇬🇧" code="en" langName="English" />
