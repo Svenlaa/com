@@ -18,11 +18,3 @@ cd home
 yarn
 yarn dev
 ```
-
-## What's next?
-
-- Resume
-- Spotify - Now Playing (Footer)
-- Automatically post to Twitter once a run is added
-- Books Tab **?**
-- Projects **?**

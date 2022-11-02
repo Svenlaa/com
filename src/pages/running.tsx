@@ -83,7 +83,7 @@ const RunningPage = () => {
             <FontAwesomeIcon icon={faArrowRight} />
           </button>
         </div>
-        <div className="mx- grid grid-cols-12 gap-2 rounded-md p-2 md:gap-2">
+        <div className="grid grid-cols-12 gap-2 rounded-md p-2 md:gap-2">
           {weeks.map((week) => (
             <ActivityBlock key={week.block} grade={week.grade || 0} />
           ))}
@@ -92,7 +92,7 @@ const RunningPage = () => {
       <div className="mx-auto max-w-xl p-2">
         {session && (
           <Link href="/running/add">
-            <a className="my-4 mx-auto flex w-4/6 flex-col text-center text-lg font-bold hover:text-prime-800 dark:hover:text-prime-200">
+            <a className="my-4 mx-auto flex w-5/6 flex-col text-center text-lg font-bold hover:text-prime-800 dark:hover:text-prime-200">
               {t("add")}
             </a>
           </Link>
