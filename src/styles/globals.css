@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply min-h-screen bg-[#ffe4e1] text-black dark:bg-[#121212] dark:text-white;
+  @apply min-h-screen bg-[#e8e3e8] bg-gradient-to-r text-black dark:bg-[#121212] dark:text-white;
 }
 
 input::-webkit-outer-spin-button,

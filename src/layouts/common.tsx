@@ -1,5 +1,4 @@
 import { ComponentProps, ReactNode } from "react";
-import Footer from "../components/footer";
 import Header from "../components/header";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
@@ -22,7 +21,7 @@ const MainLayout = (props: Props) => {
       >
         {children}
       </main>
-      {footer || <Footer />}
+      {footer || null}
     </div>
   );
 };

@@ -6,10 +6,12 @@ import {
   faBars,
   faHouse,
   faRunning,
+  faUser,
   faX,
   IconDefinition,
 } from "@fortawesome/free-solid-svg-icons";
 import { useTranslations } from "next-intl";
+import Flag from "./flag";
 
 type pathType = {
   href: string;
@@ -27,6 +29,7 @@ const Header = () => {
 
   const currPath = useRouter().asPath;
   const [isOpen, setIsOpen] = useState(false);
+  const locale = useRouter().locale;
 
   return (
     <header className="mx-auto w-screen md:container">
@@ -38,16 +41,22 @@ const Header = () => {
         </Link>
 
         {/* Section with hamburger for smaller screens */}
-        <button
-          className="translate block aspect-square rounded-full bg-prime-600 text-3xl text-white md:hidden"
-          aria-label="hamburger menu"
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          <FontAwesomeIcon
-            icon={isOpen ? faX : faBars}
-            className="aspect-square scale-90 p-2"
-          />
-        </button>
+        <div className="flex flex-row md:hidden ">
+          {locale === "nl" && <Flag label="🇬🇧" code="en" langName="English" />}
+          {locale === "en" && (
+            <Flag label="🇳🇱" code="nl" langName="Nederlands" />
+          )}
+          <button
+            className="translate aspect-square rounded-full bg-prime-600 text-3xl text-white"
+            aria-label="hamburger menu"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            <FontAwesomeIcon
+              icon={isOpen ? faX : faBars}
+              className="aspect-square scale-90 p-2"
+            />
+          </button>
+        </div>
 
         {/* Section that shows tabs on larger screens */}
         <div className="hidden gap-4 md:flex md:flex-row">
@@ -61,14 +70,30 @@ const Header = () => {
               {t(path.label)}
             </HeaderLink>
           ))}
+          {locale === "nl" && (
+            <Flag
+              label="🇬🇧"
+              code="en"
+              langName="English"
+              className="transition-text whitespace-nowrap rounded-md p-2 px-3 text-xl delay-75 duration-500 ease-out hover:text-prime-700 md:bg-white md:text-gray-800 md:hover:bg-prime-700 md:hover:text-white md:dark:bg-gray-800 md:dark:text-gray-400"
+            />
+          )}
+          {locale === "en" && (
+            <Flag
+              label="🇳🇱"
+              code="nl"
+              langName="Nederlands"
+              className="transition-text whitespace-nowrap rounded-md p-2 px-3 text-xl delay-75 duration-500 ease-out hover:text-prime-700 md:bg-white md:text-gray-800 md:hover:bg-prime-700 md:hover:text-white md:dark:bg-gray-800 md:dark:text-gray-400"
+            />
+          )}
         </div>
       </div>
 
       {/* Dropdown for smaller screens */}
       <div
         className={`${
-          isOpen ? "flex flex-col" : "hidden"
-        } absolute w-full rounded-b-xl bg-white px-4 drop-shadow-xl dark:bg-gray-900 md:hidden`}
+          isOpen ? "flex " : "hidden"
+        } absolute w-full flex-col rounded-b-xl bg-white px-4 drop-shadow-xl dark:bg-gray-900 md:hidden`}
       >
         {paths.map((path) => (
           <HeaderLink
@@ -93,6 +118,7 @@ type LinkProps = {
   isActive?: boolean;
   icon?: IconDefinition;
 };
+
 const HeaderLink = (props: LinkProps) => {
   const { to, children } = props;
   return (
@@ -100,9 +126,9 @@ const HeaderLink = (props: LinkProps) => {
       <a
         className={`${
           props.isActive
-            ? " text-prime-700 md:bg-prime-700 md:text-white md:hover:bg-prime-600"
-            : "transition-text delay-75 duration-500 ease-out hover:text-prime-700 md:bg-white md:text-gray-800 md:hover:bg-prime-700 md:hover:text-white md:dark:bg-gray-800 md:dark:text-gray-400"
-        } whitespace-nowrap rounded-md p-2 px-3 text-xl`}
+            ? "text-prime-700 md:bg-prime-700 md:text-white md:hover:bg-prime-600"
+            : "hover:text-prime-700 md:bg-white md:text-gray-800 md:hover:bg-prime-700 md:hover:text-white md:dark:bg-gray-800 md:dark:text-gray-400"
+        } transition-text whitespace-nowrap rounded-md p-2 px-3 text-xl delay-75 duration-500 ease-out`}
       >
         {props.icon ? (
           <FontAwesomeIcon className="text-md pr-2" icon={props.icon} />
