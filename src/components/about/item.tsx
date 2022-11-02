@@ -17,7 +17,7 @@ export type ItemProps = {
 };
 const Item = ({ item, t }: ItemProps) => {
   return (
-    <div className="m-4 mx-auto w-full rounded-md p-3 pb-2 dark:bg-white/10">
+    <div className="m-4 mx-auto w-full rounded-md bg-white p-3 pb-2 dark:bg-white/10">
       <p className="dark:text-white/70">
         {item.startDate === item.endDate
           ? item.startDate

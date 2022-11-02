@@ -19,7 +19,7 @@ type ProfileCardProps = {
 };
 const ProfileCard = ({ cta, profile }: ProfileCardProps) => {
   return (
-    <div className="m-4 flex flex-col rounded-2xl bg-white/50 p-8 pb-4 dark:bg-black/50">
+    <div className="m-4 flex flex-col rounded-2xl bg-white/50 p-8 pb-4 dark:bg-white/10">
       <span className="relative mx-auto h-72 w-72">
         <Image
           src={profile.pictureUrl}
@@ -67,7 +67,7 @@ const ProfileLink = (props: pathType) => {
       <a
         target="_blank"
         aria-label={props.label}
-        className="rounded-md bg-gray-200 p-1 px-2 text-lg text-gray-800 hover:bg-gray-300 dark:bg-gray-800 dark:text-gray-400 md:hover:bg-prime-700 md:hover:text-white"
+        className="rounded-md bg-black/10 p-1 px-2 text-lg text-black/80 hover:bg-gray-300 dark:text-gray-400 md:hover:bg-prime-700 md:hover:text-white"
       >
         <FontAwesomeIcon icon={props.icon} className="aspect-square" />
       </a>

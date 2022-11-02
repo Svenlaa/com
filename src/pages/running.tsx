@@ -62,7 +62,7 @@ const RunningPage = () => {
   });
 
   return (
-    <MainLayout className="mx-auto max-w-lg py-4 px-0 md:max-w-xl">
+    <MainLayout className="mx-auto max-w-xl py-4 px-0 md:max-w-xl">
       <div className="mx-2 rounded-md bg-black/20 p-1 dark:bg-white/20">
         <div className="mx-4 flex flex-row justify-between text-black/75  dark:text-white/75">
           <button
@@ -89,7 +89,7 @@ const RunningPage = () => {
           ))}
         </div>
       </div>
-      <div className="mx-auto max-w-lg p-2">
+      <div className="mx-auto max-w-xl p-2">
         {session && (
           <Link href="/running/add">
             <a className="my-4 mx-auto flex w-4/6 flex-col text-center text-lg font-bold hover:text-prime-800 dark:hover:text-prime-200">
