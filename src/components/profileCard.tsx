@@ -47,12 +47,11 @@ const ProfileCard = ({ cta, profile }: ProfileCardProps) => {
           ))}
         </div>
       )}
-      <button
-        className="mx-auto my-2 w-min whitespace-nowrap rounded-full bg-prime-600 py-2 px-4 text-2xl font-extrabold text-white hover:bg-prime-700"
-        onClick={() => window.alert(cta.message)}
-      >
-        {cta.label}
-      </button>
+      <Link href="/about">
+        <a className="mx-auto my-2 w-min whitespace-nowrap rounded-full bg-prime-600 py-2 px-4 text-2xl font-extrabold text-white hover:bg-prime-700">
+          {cta.label}
+        </a>
+      </Link>
     </div>
   );
 };

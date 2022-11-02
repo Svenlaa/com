@@ -2,10 +2,11 @@
   "Header": {
     "home": "Home",
     "running": "Running",
-    "account": "Account"
+    "account": "Account",
+    "about": "About"
   },
   "Home": {
-    "cta_label": "Click the button",
+    "cta_label": "Get to know more",
     "cta_message": "Coming soon..."
   },
   "Running": {
@@ -18,5 +19,19 @@
     "time": "Time",
     "distance": "Distance",
     "submit": "Add"
+  },
+  "About": {
+    "internship": "Internship",
+    "stocker": "Shelf Stocker",
+    "present": "Present",
+    "experience": "Werkervaring",
+    "education": "Education",
+    "eega_title": "Apprenticeship Developer",
+    "to_typescript": "Converted website from Javascript to Typescript",
+    "learn_use_react": "Learned and used React",
+    "teamwork": "Worked together in a team using Github",
+    "built_personal_site": "Built a personal website",
+    "stocked_shelves": "Stocked shelves",
+    "unfinished": "Didn't finish"
   }
 }

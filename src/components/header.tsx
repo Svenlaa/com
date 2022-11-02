@@ -22,6 +22,7 @@ type pathType = {
 const paths: Readonly<pathType[]> = [
   { href: "/", label: "home", icon: faHouse },
   { href: "/running", label: "running", icon: faRunning },
+  { href: "/about", label: "about", icon: faUser },
 ] as const;
 
 const Header = () => {
@@ -29,7 +30,7 @@ const Header = () => {
 
   const currPath = useRouter().asPath;
   const [isOpen, setIsOpen] = useState(false);
-  const locale = useRouter().locale;
+  const locl = useRouter().locale;
 
   return (
     <header className="mx-auto w-screen md:container">
@@ -42,10 +43,8 @@ const Header = () => {
 
         {/* Section with hamburger for smaller screens */}
         <div className="flex flex-row md:hidden ">
-          {locale === "nl" && <Flag label="🇬🇧" code="en" langName="English" />}
-          {locale === "en" && (
-            <Flag label="🇳🇱" code="nl" langName="Nederlands" />
-          )}
+          {locl === "nl" && <Flag label="🇬🇧" code="en" langName="English" />}
+          {locl === "en" && <Flag label="🇳🇱" code="nl" langName="Nederlands" />}
           <button
             className="translate aspect-square rounded-full bg-prime-600 text-3xl text-white"
             aria-label="hamburger menu"
@@ -70,20 +69,20 @@ const Header = () => {
               {t(path.label)}
             </HeaderLink>
           ))}
-          {locale === "nl" && (
+          {locl === "nl" && (
             <Flag
               label="🇬🇧"
               code="en"
               langName="English"
-              className="transition-text whitespace-nowrap rounded-md p-2 px-3 text-xl delay-75 duration-500 ease-out hover:text-prime-700 md:bg-white md:text-gray-800 md:hover:bg-prime-700 md:hover:text-white md:dark:bg-gray-800 md:dark:text-gray-400"
+              className="transition-text whitespace-nowrap rounded-md bg-white p-2 px-3 text-xl text-gray-800 delay-75 duration-500 ease-out hover:bg-prime-700 hover:text-white dark:bg-gray-800 dark:text-gray-400"
             />
           )}
-          {locale === "en" && (
+          {locl === "en" && (
             <Flag
               label="🇳🇱"
               code="nl"
               langName="Nederlands"
-              className="transition-text whitespace-nowrap rounded-md p-2 px-3 text-xl delay-75 duration-500 ease-out hover:text-prime-700 md:bg-white md:text-gray-800 md:hover:bg-prime-700 md:hover:text-white md:dark:bg-gray-800 md:dark:text-gray-400"
+              className="transition-text whitespace-nowrap rounded-md bg-white p-2 px-3 text-xl text-gray-800 delay-75 duration-500 ease-out hover:bg-prime-700 hover:text-white dark:bg-gray-800 dark:text-gray-400"
             />
           )}
         </div>
