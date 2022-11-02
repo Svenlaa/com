@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
+import Input from "../../components/form/input";
 import MainLayout from "../../layouts/common";
 import { trpc } from "../../utils/trpc";
 
@@ -49,42 +50,28 @@ const AddRunPage = () => {
         onSubmit={onSubmit}
         className="mx-auto w-4/6 rounded-md bg-black/20 p-4 dark:bg-white/20 md:w-2/6"
       >
-        <div className="my-2 flex w-full flex-row items-center justify-between">
-          <span className="mr-1 font-bold">{t("date")}</span>
-          <input
-            className="w-[14ch] rounded-sm leading-relaxed text-black"
-            type="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-          />
-        </div>
-        <div className="my-2 flex w-full flex-row items-center justify-between">
-          <span className="mr-1 font-bold">{t("time")}</span>
-          <input
-            className="w-[14ch] rounded-sm px-1 leading-relaxed text-black"
-            type="text"
-            pattern="[0-9]*:[0-9][0-9]"
-            value={time}
-            onChange={(e) => setTime(e.target.value)}
-            placeholder="121:09"
-          />
-        </div>
-        <div className="my-2 flex w-full flex-row items-center justify-between">
-          <span className="mr-1 font-bold">{t("distance")}</span>
-          <span className="flex w-[14ch] flex-row items-center">
-            <input
-              className="w-full rounded-sm px-1 text-black"
-              type="number"
-              value={distance}
-              step="0.05"
-              min="1"
-              max="1000"
-              onChange={(e) => setDistance(e.target.value)}
-              required
-            />
-            <span className="ml-1 text-lg font-bold leading-tight">km</span>
-          </span>
-        </div>
+        <Input label={t("date")} val={date} set={setDate} type="date" />
+        <Input
+          label={t("time")}
+          val={time}
+          set={setTime}
+          type="text"
+          pattern="[0-9]*:[0-9][0-9]"
+          placeholder="121:09"
+          required
+        />
+        <Input
+          label={t("distance")}
+          unit="km"
+          val={distance}
+          set={setDistance}
+          type="number"
+          step="0.05"
+          min="1"
+          max="1000"
+          placeholder="42.2"
+          required
+        />
 
         <button
           disabled={createRun.isLoading}
