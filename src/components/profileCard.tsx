@@ -47,7 +47,7 @@ const ProfileCard = ({ cta, profile }: ProfileCardProps) => {
           ))}
         </div>
       )}
-      <Link href="/about">
+      <Link href="/running">
         <a className="mx-auto my-2 w-min whitespace-nowrap rounded-full bg-prime-600 py-2 px-4 text-2xl font-extrabold text-white hover:bg-prime-700">
           {cta.label}
         </a>
