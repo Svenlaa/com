@@ -19,19 +19,5 @@
     "time": "Tijd",
     "distance": "Afstand",
     "submit": "Toevoegen"
-  },
-  "About": {
-    "internship": "Stage",
-    "stocker": "Vakkenvuller",
-    "present": "Heden",
-    "experience": "Werkervaring",
-    "education": "Opleiding",
-    "eega_title": "Leer-werk traject Developer",
-    "to_typescript": "Website omgezet van Javascript naar Typescript",
-    "learn_use_react": "React geleerd en in de praktijk ingezet",
-    "teamwork": "Samengewerkt in een team met Github",
-    "built_personal_site": "Persoonlijke website gebouwd.",
-    "stocked_shelves": "Vakken Gevuld",
-    "unfinished": "Niet afgerond"
   }
 }

@@ -78,7 +78,7 @@ const RunningPage = () => {
             aria-label={t("next_year")}
             onClick={() => setYear(year + 1)}
             disabled={year >= new Date().getFullYear()}
-            className=" disabled:text-black/25 dark:disabled:text-white/25"
+            className="disabled:text-black/25 dark:disabled:text-white/25"
           >
             <FontAwesomeIcon icon={faArrowRight} />
           </button>
