@@ -2,8 +2,7 @@
   "Header": {
     "home": "Home",
     "running": "Hardlopen",
-    "account": "Account",
-    "about": "Over"
+    "cv": "CV"
   },
   "Home": {
     "cta_label": "Hardlopen Activteiten",

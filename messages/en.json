@@ -2,8 +2,7 @@
   "Header": {
     "home": "Home",
     "running": "Running",
-    "account": "Account",
-    "about": "About"
+    "cv": "CV"
   },
   "Home": {
     "cta_label": "Running Activity",

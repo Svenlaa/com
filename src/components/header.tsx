@@ -6,6 +6,7 @@ import {
   faBars,
   faHouse,
   faRunning,
+  faUser,
   faX,
   IconDefinition,
 } from "@fortawesome/free-solid-svg-icons";
@@ -20,7 +21,8 @@ type pathType = {
 
 const paths: Readonly<pathType[]> = [
   { href: "/", label: "home", icon: faHouse },
-  { href: "/running", label: "running", icon: faRunning }
+  { href: "/running", label: "running", icon: faRunning },
+  { href: "https://cv.svenlaa.com", label: "cv", icon: faUser }
 ] as const;
 
 const Header = () => {
