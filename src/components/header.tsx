@@ -22,7 +22,7 @@ type pathType = {
 const paths: Readonly<pathType[]> = [
   { href: "/", label: "home", icon: faHouse },
   { href: "/running", label: "running", icon: faRunning },
-  { href: "https://cv.svenlaa.com", label: "cv", icon: faUser }
+  { href: "https://cv.svenlaa.com", label: "cv", icon: faUser },
 ] as const;
 
 const Header = () => {
@@ -33,7 +33,7 @@ const Header = () => {
   const locl = useRouter().locale;
 
   return (
-    <header className="mx-auto w-screen md:container">
+    <header className="z-50 mx-auto w-screen md:container">
       <div className="mx-auto flex w-full flex-row justify-between bg-white p-4 dark:bg-black md:bg-inherit">
         <Link href="/">
           <a className="my-auto text-3xl duration-200 ease-in hover:text-prime-900 dark:hover:text-prime-200">
