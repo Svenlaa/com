@@ -21,4 +21,5 @@ export default defineNextConfig({
     locales: ["en", "nl"],
     defaultLocale: "nl",
   },
+  images: { domains: ["github.com"] },
 });

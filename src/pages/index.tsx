@@ -13,7 +13,7 @@ import MainLayout from "../layouts/common";
 
 const profile = {
   name: "Sven Lammertink",
-  pictureUrl: "/Sven.jpg",
+  pictureUrl: "https://github.com/Svenlaa.png",
   role: "Software developer",
   links: [
     { href: "https://github.com/Svenlaa", icon: faGithub, label: "github" },
