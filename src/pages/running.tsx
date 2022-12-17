@@ -5,6 +5,7 @@ import { GetStaticProps } from "next";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import ActivityBlock from "../components/ActivityBlock";
 import ActivityItem from "../components/ActivityItem";
@@ -35,6 +36,9 @@ const RunningPage = () => {
   const { data: session } = useSession();
   const t = useTranslations("Running");
 
+  const router = useRouter();
+  const filter = router.query.filter ?? null;
+
   const yearlyDistance =
     isLoading || !runs
       ? 0
@@ -61,6 +65,10 @@ const RunningPage = () => {
       distances[i] === 0 ? 0 : Math.ceil((1 / (maxDistance / v)) * 4);
   });
 
+  const filteredRuns = runs?.filter(
+    (v) => filter === null || v.yearWeek === filter
+  );
+
   return (
     <MainLayout className="mx-auto max-w-xl py-4 px-0 md:max-w-xl">
       <div className="mx-2 rounded-md bg-black/20 p-1 dark:bg-white/20">
@@ -85,7 +93,11 @@ const RunningPage = () => {
         </div>
         <div className="grid grid-cols-12 gap-2 rounded-md p-2 md:gap-2">
           {weeks.map((week) => (
-            <ActivityBlock key={week.block} grade={week.grade || 0} />
+            <ActivityBlock
+              key={week.block}
+              yearWeek={week.block}
+              grade={week.grade || 0}
+            />
           ))}
         </div>
       </div>
@@ -97,7 +109,7 @@ const RunningPage = () => {
             </a>
           </Link>
         )}
-        {runs?.map((run) => (
+        {filteredRuns?.map((run) => (
           <ActivityItem
             item={run}
             showDelete={session?.user?.id === run.runnerId}

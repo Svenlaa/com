@@ -28,7 +28,7 @@ const paths: Readonly<pathType[]> = [
 const Header = () => {
   const t = useTranslations("Header");
 
-  const currPath = useRouter().asPath;
+  const currPath = useRouter().pathname;
   const [isOpen, setIsOpen] = useState(false);
   const locl = useRouter().locale;
 
