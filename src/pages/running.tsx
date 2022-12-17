@@ -118,6 +118,9 @@ const RunningPage = () => {
           />
         ))}
       </div>
+      <Link href={router.pathname}>
+        <div className="fixed left-0 top-0 -z-10 h-screen w-screen" />
+      </Link>
     </MainLayout>
   );
 };
