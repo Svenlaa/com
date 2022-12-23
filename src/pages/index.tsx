@@ -24,7 +24,7 @@ const profile = {
     },
     { href: "https://twitter.com/Svenlaa", icon: faTwitter, label: "twitter" },
     {
-      href: "mailto:sven.lammertink@homtail.com",
+      href: "mailto:sven.lammertink@hotmail.com",
       icon: faEnvelope,
       label: "email",
     },
