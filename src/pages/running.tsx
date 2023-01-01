@@ -109,6 +109,13 @@ const RunningPage = () => {
             </a>
           </Link>
         )}
+        {!filteredRuns?.length && (
+          <div className="my-4 mx-auto flex w-5/6 items-center justify-center rounded-lg bg-white p-4 px-6 text-center dark:bg-white/10 ">
+            <span className="text-lg font-semibold">
+              {t("nothing_found")} ☹️
+            </span>
+          </div>
+        )}
         {filteredRuns?.map((run) => (
           <ActivityItem
             item={run}

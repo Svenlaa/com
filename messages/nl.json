@@ -11,7 +11,8 @@
   "Running": {
     "add": "Voeg een loop toe",
     "previous_year": "Vorig jaar",
-    "next_year": "Volgend jaar"
+    "next_year": "Volgend jaar",
+    "nothing_found": "Niks gevonden"
   },
   "RunningAdd": {
     "date": "Datum",

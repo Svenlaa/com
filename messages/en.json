@@ -11,7 +11,8 @@
   "Running": {
     "add": "Add a run",
     "previous_year": "Previous year",
-    "next_year": "Next year"
+    "next_year": "Next year",
+    "nothing_found": "Nothing found"
   },
   "RunningAdd": {
     "date": "Date",
