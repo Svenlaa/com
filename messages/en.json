@@ -12,7 +12,8 @@
     "add": "Add a run",
     "previous_year": "Previous year",
     "next_year": "Next year",
-    "nothing_found": "Nothing found"
+    "nothing_found": "Nothing found",
+    "loading": "Loading..."
   },
   "RunningAdd": {
     "date": "Date",

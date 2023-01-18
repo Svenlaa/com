@@ -5,7 +5,6 @@ import CommonLayout from "../layouts/common";
 import {
   faGithub,
   faLinkedin,
-  faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 import ProfileCard from "../components/profileCard";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";

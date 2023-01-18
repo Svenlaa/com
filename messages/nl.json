@@ -12,7 +12,8 @@
     "add": "Voeg een loop toe",
     "previous_year": "Vorig jaar",
     "next_year": "Volgend jaar",
-    "nothing_found": "Niks gevonden"
+    "nothing_found": "Niks gevonden",
+    "loading": "Aan het laden..."
   },
   "RunningAdd": {
     "date": "Datum",

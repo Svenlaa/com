@@ -19,7 +19,13 @@ type Prop = {
 };
 
 const RunningPage = () => {
-  const [year, setYear] = useState(new Date().getFullYear());
+  // Remove filter on year change
+  const [year, setYearState] = useState(new Date().getFullYear());
+  const setYear = (targetYear: number) => {
+    router.push(router.basePath, undefined, { shallow: true });
+    setYearState(targetYear);
+  };
+
   const amountOfWeeks = getWeeksInYear(year);
   const weeks: Prop[] = [];
   const utils = trpc.useContext();
@@ -102,6 +108,11 @@ const RunningPage = () => {
         </div>
       </div>
       <div className="mx-auto max-w-xl p-2">
+        {isLoading && (
+          <div className="my-4 mx-auto flex w-5/6 items-center justify-center rounded-lg bg-white p-4 px-6 text-center dark:bg-white/10 ">
+            <span className="text-lg font-semibold">{t("loading")}</span>
+          </div>
+        )}
         {session && (
           <Link href="/running/add">
             <a className="my-4 mx-auto flex w-5/6 flex-col text-center text-lg font-bold hover:text-prime-800 dark:hover:text-prime-200">

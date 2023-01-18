@@ -10,7 +10,7 @@ export const runningRouter = router({
       return await ctx.prisma.run.findMany({
         where: {
           AND: {
-            date: { startsWith: input + "" },
+            yearWeek: { startsWith: `${input}w` },
             runnerId: user?.id,
           },
         },
@@ -52,6 +52,7 @@ export const runningRouter = router({
       });
       if (dbRunnerId?.runnerId !== runnerId)
         throw Error("You are not authorized to delete this run");
+
       return await ctx.prisma.run.delete({
         where: { id: run },
       });
