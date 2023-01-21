@@ -21,7 +21,7 @@ const ActivityBlock = ({ grade, yearWeek }: ActivityBlockProps) => {
       <span
         data-aria-grade={grade}
         className={`flex aspect-square items-center justify-center rounded-sm border-[1px] border-black/30 bg-black/5 p-1 text-center leading-none text-black/75 dark:bg-white/5 dark:text-white/75`}
-        style={bgColor ? { backgroundColor: bgColor } : undefined}
+        style={{ backgroundColor: bgColor || undefined }}
       />
     </Link>
   );

@@ -23,7 +23,7 @@ const ActivityItem = ({ item, showDelete, onDelete = () => null }: Props) => {
     dateStyle: "full",
   });
   return (
-    <div className="my-4 mx-auto flex w-5/6 flex-col justify-between rounded-lg bg-white p-4 px-6 dark:bg-white/10 ">
+    <div className="my-4 mx-auto flex flex-col justify-between rounded-lg bg-white p-4 px-6 dark:bg-white/10 ">
       <div className="flex flex-row justify-between text-lg">
         <p className="font-bold text-prime-700 dark:text-prime-400">
           {dateString}

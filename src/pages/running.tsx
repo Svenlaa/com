@@ -107,21 +107,21 @@ const RunningPage = () => {
           ))}
         </div>
       </div>
-      <div className="mx-auto max-w-xl p-2">
-        {isLoading && (
-          <div className="my-4 mx-auto flex w-5/6 items-center justify-center rounded-lg bg-white p-4 px-6 text-center dark:bg-white/10 ">
-            <span className="text-lg font-semibold">{t("loading")}</span>
-          </div>
-        )}
+      <div className="mx-auto w-96 pb-2 transition-all">
         {session && (
           <Link href="/running/add">
-            <a className="my-4 mx-auto flex w-5/6 flex-col text-center text-lg font-bold hover:text-prime-800 dark:hover:text-prime-200">
+            <a className="my-4 mx-auto flex flex-col text-center text-lg font-bold hover:text-prime-800 dark:hover:text-prime-200">
               {t("add")}
             </a>
           </Link>
         )}
+        {isLoading && (
+          <div className="my-4 mx-auto flex items-center justify-center rounded-lg bg-white p-4 px-6 text-center dark:bg-white/10 ">
+            <span className="text-lg font-semibold">{t("loading")}</span>
+          </div>
+        )}
         {!filteredRuns?.length && !isLoading && (
-          <div className="my-4 mx-auto flex w-5/6 items-center justify-center rounded-lg bg-white p-4 px-6 text-center dark:bg-white/10 ">
+          <div className="my-4 mx-auto flex items-center justify-center rounded-lg bg-white p-4 px-6 text-center dark:bg-white/10 ">
             <span className="text-lg font-semibold">
               {t("nothing_found")} ☹️
             </span>
