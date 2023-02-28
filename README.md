@@ -10,11 +10,11 @@
 
 ## Running Locally
 
-This application requires Node.js and Docker
+This application requires Node.js and pnpm
 
 ```bash
-git clone https://github.com/svenlaa/home.git
+git clone https://github.com/Svenlaa/home.git
 cd home
-yarn
-yarn dev
+pnpm i
+pnpm dev
 ```
