@@ -4,6 +4,7 @@ import pick from "lodash/pick";
 import CommonLayout from "../layouts/common";
 import {
   faGithub,
+  faGitlab,
   faLinkedin,
 } from "@fortawesome/free-brands-svg-icons";
 import ProfileCard from "../components/profileCard";
@@ -15,9 +16,10 @@ const profile = {
   pictureUrl: "https://github.com/Svenlaa.png",
   role: "Software developer",
   links: [
-    { href: "https://github.com/Svenlaa", icon: faGithub, label: "github" },
+    { href: "https://github.com/Svenlaa", icon: faGithub, label: "GitHub" },
+    { href: "https://gitlab.com/Svenlaa", icon: faGitlab, label: "GitLab" },
     {
-      href: "https://www.linkedin.com/in/svenlaa",
+      href: "https://linkedin.com/in/svenlaa",
       icon: faLinkedin,
       label: "LinkedIn",
     },
