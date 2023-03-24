@@ -17,7 +17,7 @@ module.exports = {
       fontFamily: {
         sans: ["Noto Color Emoji", ...defaultTheme.fontFamily.sans],
         serif: ["Noto Color Emoji", ...defaultTheme.fontFamily.serif],
-        mono: ["Noto Color Emoji", ...defaultTheme.fontFamily.mono]
+        mono: ["Noto Color Emoji", ...defaultTheme.fontFamily.mono],
       },
     },
   },
