@@ -37,7 +37,7 @@ const ActivityItem = ({ item, showDelete, onDelete = () => null }: Props) => {
           </button>
         )}
       </div>
-      <div className="mt-1 flex flex-row flex-nowrap justify-start">
+      <div className="mt-2 flex flex-row flex-nowrap justify-between">
         {item.time && (
           <Detail icon={faClock}>{formatToTimeString(item.time)}</Detail>
         )}
@@ -54,11 +54,11 @@ const ActivityItem = ({ item, showDelete, onDelete = () => null }: Props) => {
 
 type DetailProps = { children: ReactNode; icon?: IconDefinition };
 const Detail = ({ icon, children }: DetailProps) => (
-  <span className="mx-2 w-[12ch] whitespace-nowrap text-center text-gray-700 dark:text-gray-200">
+  <span className="mx-1 whitespace-nowrap text-center text-gray-800 dark:text-gray-100">
     {icon && (
       <FontAwesomeIcon
         icon={icon}
-        className="mr-1 text-gray-800 dark:text-gray-100"
+        className="mr-1 text-gray-600 dark:text-gray-300"
       />
     )}
     {children}
