@@ -127,7 +127,7 @@ const HeaderLink = (props: LinkProps) => {
           props.isActive
             ? "text-prime-700 md:bg-prime-700 md:text-white md:hover:bg-prime-600"
             : "hover:text-prime-700 md:bg-white md:text-gray-800 md:hover:bg-prime-700 md:hover:text-white md:dark:bg-gray-800 md:dark:text-gray-400"
-        } transition-text whitespace-nowrap rounded-md p-2 px-3 text-xl delay-75 duration-500 ease-out`}
+        } transition-text whitespace-nowrap rounded-md p-2 px-3 text-xl drop-shadow-sm delay-75 duration-500 ease-out`}
       >
         {props.icon ? (
           <FontAwesomeIcon className="text-md pr-2" icon={props.icon} />

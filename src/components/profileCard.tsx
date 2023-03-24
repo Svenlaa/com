@@ -19,7 +19,7 @@ type ProfileCardProps = {
 };
 const ProfileCard = ({ cta, profile }: ProfileCardProps) => {
   return (
-    <div className="m-4 flex flex-col rounded-2xl bg-white/50 p-8 pb-4 dark:bg-white/10">
+    <div className="m-4 flex flex-col rounded-2xl bg-white/50 p-8 pb-4 drop-shadow-2xl dark:bg-white/10">
       <span className="relative mx-auto h-72 w-72">
         <Image
           src={profile.pictureUrl}

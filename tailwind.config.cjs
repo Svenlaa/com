@@ -11,6 +11,9 @@ module.exports = {
         prime: colors.emerald,
         neutral: colors.slate,
       },
+      fontFamily: {
+        flagmoji: ["Noto Color Emoji"],
+      },
     },
   },
   plugins: [],

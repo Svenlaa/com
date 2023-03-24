@@ -13,7 +13,7 @@ const Flag = ({ label, code, langName, className }: FlagProps) => {
   return (
     <Link href={router.pathname} locale={code}>
       <a
-        className={`rounded-md py-2 px-4 text-2xl ${
+        className={`rounded-md py-2 px-4 font-flagmoji text-2xl ${
           active && "backdrop-brightness-90 dark:backdrop-brightness-125"
         } ${className}`}
         title={langName}
