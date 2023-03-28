@@ -19,6 +19,7 @@
     "date": "Datum",
     "time": "Tijd",
     "distance": "Afstand",
+    "location": "Locatie",
     "submit": "Toevoegen"
   }
 }

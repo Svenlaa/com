@@ -1,6 +1,7 @@
 import {
   faClock,
   faGaugeHigh,
+  faMapLocationDot,
   faRoute,
   faTrash,
   IconDefinition,
@@ -25,7 +26,11 @@ const ActivityItem = ({ item, showDelete, onDelete = () => null }: Props) => {
   return (
     <div className="my-4 mx-auto flex flex-col justify-between rounded-lg bg-white p-4 px-6 dark:bg-white/10 ">
       <div className="flex flex-row justify-between text-lg">
-        <p className="font-bold text-prime-700 dark:text-prime-400">
+        <p
+          className={`font-bold text-prime-700 dark:text-prime-400 ${
+            item.isEvent && "text-amber-600 dark:text-amber-400"
+          }`}
+        >
           {dateString}
         </p>
         {showDelete && (
@@ -38,6 +43,9 @@ const ActivityItem = ({ item, showDelete, onDelete = () => null }: Props) => {
         )}
       </div>
       <div className="mt-2 flex flex-row flex-nowrap justify-between">
+        {item.location && !item.time && (
+          <Detail icon={faMapLocationDot}>{item.location}</Detail>
+        )}
         {item.time && (
           <Detail icon={faClock}>{formatToTimeString(item.time)}</Detail>
         )}

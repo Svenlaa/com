@@ -1,5 +1,6 @@
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Run } from "@prisma/client";
 import { pick } from "lodash";
 import { GetStaticProps } from "next";
 import { useSession } from "next-auth/react";
@@ -13,10 +14,14 @@ import MainLayout from "../layouts/common";
 import { getWeeksInYear } from "../utils/date";
 import { trpc } from "../utils/trpc";
 
-type Prop = {
+type WeekType = {
   block: string;
   grade?: number;
+  hasEvent: boolean;
 };
+
+const sumDistance = (currentSum: number, run: Run) =>
+  run.time ? currentSum + run.distance : currentSum;
 
 const RunningPage = () => {
   // Remove filter on year change
@@ -27,7 +32,7 @@ const RunningPage = () => {
   };
 
   const amountOfWeeks = getWeeksInYear(year);
-  const weeks: Prop[] = [];
+  const weeks: WeekType[] = [];
   const utils = trpc.useContext();
   const getRunsQuery = trpc.running.getAll;
   const { isLoading, data: runs } = getRunsQuery.useQuery(year);
@@ -46,9 +51,7 @@ const RunningPage = () => {
   const filter = router.query.filter ?? null;
 
   const yearlyDistance =
-    isLoading || !runs
-      ? 0
-      : runs.reduce((pSum, v) => pSum + v.distance, 0) / 1000;
+    isLoading || !runs ? 0 : runs.reduce(sumDistance, 0) / 1000;
 
   const distances: number[] = [];
   for (let i = 1; i <= amountOfWeeks; i++) {
@@ -57,11 +60,13 @@ const RunningPage = () => {
     const runsThisWeek =
       runs?.filter((item) => item.yearWeek === yearWeek) ?? [];
 
-    const weeklyDistance =
-      runsThisWeek?.reduce((pSum, v) => pSum + v.distance, 0) / 1000;
+    const eventIndex = runsThisWeek.findIndex((run) => run.isEvent);
+    const hasEvent = eventIndex === -1 ? false : true;
+
+    const weeklyDistance = runsThisWeek?.reduce(sumDistance, 0) / 1000;
 
     distances.push(weeklyDistance);
-    weeks.push({ block: yearWeek });
+    weeks.push({ block: yearWeek, hasEvent });
   }
 
   const maxDistance = Math.max(...distances);
@@ -103,6 +108,7 @@ const RunningPage = () => {
               key={week.block}
               yearWeek={week.block}
               grade={week.grade || 0}
+              hasEvent={week.hasEvent}
             />
           ))}
         </div>
@@ -130,7 +136,7 @@ const RunningPage = () => {
         {filteredRuns?.map((run) => (
           <ActivityItem
             item={run}
-            showDelete={session?.user?.id === run.runnerId}
+            showDelete={session?.user !== null}
             key={run.id}
             onDelete={onDelete}
           />

@@ -17,7 +17,12 @@ const Input = ({
 }: Omit<JSX.IntrinsicElements["input"], "value"> & Props) => {
   return (
     <div className="my-2 flex w-full flex-row items-center justify-between">
-      <span className="mr-1 font-bold">{label}</span>
+      <span className="mr-1 font-bold">
+        {label}
+        {props.required && (
+          <span className="px-1 font-bold text-red-600">*</span>
+        )}
+      </span>
       <span className={`flex w-[16ch] flex-row items-center ${className}`}>
         <input
           className={`w-full rounded-sm px-[2px] leading-relaxed text-black`}

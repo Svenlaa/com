@@ -19,6 +19,7 @@
     "date": "Date",
     "time": "Time",
     "distance": "Distance",
+    "location": "Location",
     "submit": "Add"
   }
 }

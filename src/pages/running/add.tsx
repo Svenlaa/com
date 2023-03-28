@@ -21,6 +21,7 @@ const AddRunPage = () => {
   const [date, setDate] = useState("");
   const [distance, setDistance] = useState("");
   const [time, setTime] = useState("");
+  const [location, setLocation] = useState("");
 
   const t = useTranslations("RunningAdd");
 
@@ -32,13 +33,15 @@ const AddRunPage = () => {
       {
         distance: +distance * 1000,
         date: date || undefined,
-        time: +timeArr[0] * 60 + +timeArr[1],
+        time: +timeArr[0] * 60 + +timeArr[1] || null,
+        location: location || null,
       },
       {
         onSuccess: () => {
           setDate("");
           setDistance("");
           setTime("");
+          setLocation("");
         },
       }
     );
@@ -58,7 +61,6 @@ const AddRunPage = () => {
           type="text"
           pattern="[0-9]*:[0-9][0-9]"
           placeholder="121:09"
-          required
         />
         <Input
           label={t("distance")}
@@ -71,6 +73,13 @@ const AddRunPage = () => {
           max="1000"
           placeholder="42.2"
           required
+        />
+        <Input
+          label={t("location")}
+          val={location}
+          set={setLocation}
+          type="text"
+          placeholder="Berlin"
         />
 
         <button
