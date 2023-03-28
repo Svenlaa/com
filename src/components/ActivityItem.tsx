@@ -27,8 +27,10 @@ const ActivityItem = ({ item, showDelete, onDelete = () => null }: Props) => {
     <div className="my-4 mx-auto flex flex-col justify-between rounded-lg bg-white p-4 px-6 dark:bg-white/10 ">
       <div className="flex flex-row justify-between text-lg">
         <p
-          className={`font-bold text-prime-700 dark:text-prime-400 ${
-            item.isEvent && "text-amber-600 dark:text-amber-400"
+          className={`font-bold ${
+            item.isEvent
+              ? "text-amber-600 dark:text-amber-400"
+              : "text-prime-700 dark:text-prime-400"
           }`}
         >
           {dateString}
