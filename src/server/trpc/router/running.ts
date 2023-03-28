@@ -29,8 +29,8 @@ export const runningRouter = router({
     .mutation(async ({ input, ctx }) => {
       const date = input.date;
       const yearWeek = formatYearWeek(new Date(date));
-      const runnerId = ctx.session.user.id;
-      if (!runnerId) throw Error("You are not authorized to create runs");
+      if (!ctx.session.user.isAdmin)
+        throw Error("You are not authorized to create runs");
       return await ctx.prisma.run.create({
         data: {
           date,
@@ -45,8 +45,8 @@ export const runningRouter = router({
     .input(z.string())
     .mutation(async ({ input, ctx }) => {
       const run = input;
-      const runnerId = ctx.session.user.id;
-      if (!runnerId) throw Error("You are not authorized to delete runs");
+      if (!ctx.session.user.isAdmin)
+        throw Error("You are not authorized to create runs");
 
       return await ctx.prisma.run.delete({
         where: { id: run },
