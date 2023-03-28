@@ -35,7 +35,7 @@ const RunningPage = () => {
   const weeks: WeekType[] = [];
   const utils = trpc.useContext();
   const getRunsQuery = trpc.running.getAll;
-  const { isLoading, data: runs } = getRunsQuery.useQuery(year);
+  const { isLoading, data: runs, isError } = getRunsQuery.useQuery(year);
   const deleteMutation = trpc.running.deleteItem.useMutation();
   const onDelete = (runId: string) => {
     deleteMutation.mutate(runId, {
@@ -116,18 +116,23 @@ const RunningPage = () => {
       <div className="mx-auto w-80 pb-2 transition-all">
         {session && (
           <Link href="/running/add">
-            <a className="my-4 mx-auto flex flex-col text-center text-lg font-bold hover:text-prime-800 dark:hover:text-prime-200">
+            <a className="my-4 mx-auto flex flex-col border-2 border-gray-400 text-center text-lg font-bold hover:text-prime-800 dark:hover:text-prime-200">
               {t("add")}
             </a>
           </Link>
         )}
         {isLoading && (
-          <div className="my-4 mx-auto flex items-center justify-center rounded-lg bg-white p-4 px-6 text-center dark:bg-white/10 ">
+          <div className="my-4 mx-auto flex items-center justify-center rounded-lg border-2 border-gray-400 bg-white p-4 px-6 text-center dark:bg-white/10 ">
             <span className="text-lg font-semibold">{t("loading")}</span>
           </div>
         )}
-        {!filteredRuns?.length && !isLoading && (
-          <div className="my-4 mx-auto flex items-center justify-center rounded-lg bg-white p-4 px-6 text-center dark:bg-white/10 ">
+        {!isLoading && isError && (
+          <div className="my-4 mx-auto flex items-center justify-center rounded-lg border-2 border-red-400 bg-white p-4 px-6 text-center dark:bg-white/10 ">
+            <span className="text-lg font-semibold">{t("error")}</span>
+          </div>
+        )}
+        {!filteredRuns?.length && !isLoading && !isError && (
+          <div className="my-4 mx-auto flex items-center justify-center rounded-lg border-2 border-gray-400 bg-white p-4 px-6 text-center dark:bg-white/10 ">
             <span className="text-lg font-semibold">
               {t("nothing_found")} ☹️
             </span>

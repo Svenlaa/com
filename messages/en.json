@@ -13,7 +13,8 @@
     "previous_year": "Previous year",
     "next_year": "Next year",
     "nothing_found": "Nothing found",
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "error": "Something went wrong"
   },
   "RunningAdd": {
     "date": "Date",

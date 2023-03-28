@@ -13,7 +13,8 @@
     "previous_year": "Vorig jaar",
     "next_year": "Volgend jaar",
     "nothing_found": "Niks gevonden",
-    "loading": "Aan het laden..."
+    "loading": "Aan het laden...",
+    "error": "Ai, daar ging iets mis"
   },
   "RunningAdd": {
     "date": "Datum",

@@ -21,7 +21,7 @@ type Props = {
 const ActivityItem = ({ item, showDelete, onDelete = () => null }: Props) => {
   const router = useRouter();
   const dateString = new Date(item.date).toLocaleDateString(router.locale, {
-    dateStyle: "full",
+    dateStyle: "long",
   });
   return (
     <div
