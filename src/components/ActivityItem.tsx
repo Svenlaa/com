@@ -24,7 +24,11 @@ const ActivityItem = ({ item, showDelete, onDelete = () => null }: Props) => {
     dateStyle: "full",
   });
   return (
-    <div className="my-4 mx-auto flex flex-col justify-between rounded-lg bg-white p-4 px-6 dark:bg-white/10 ">
+    <div
+      className={`my-4 mx-auto flex flex-col justify-between rounded-lg border-2 bg-white p-4 px-6 dark:bg-white/10 ${
+        item.isEvent ? "border-amber-400" : "border-gray-400"
+      }`}
+    >
       <div className="flex flex-row justify-between text-lg">
         <p
           className={`font-bold ${
