@@ -46,7 +46,7 @@ export const runningRouter = router({
     .mutation(async ({ input, ctx }) => {
       const run = input;
       if (!ctx.session.user.isAdmin)
-        throw Error("You are not authorized to create runs");
+        throw Error("You are not authorized to delete runs");
 
       return await ctx.prisma.run.delete({
         where: { id: run },
