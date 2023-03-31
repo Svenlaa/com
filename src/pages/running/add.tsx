@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
 import Input from "../../components/form/input";
 import MainLayout from "../../layouts/common";
+import routes from "../../utils/routes";
 import { trpc } from "../../utils/trpc";
 
 const AddRunPage = () => {
@@ -14,7 +15,7 @@ const AddRunPage = () => {
   useSession({
     required: true,
     onUnauthenticated: () => {
-      router.push("/account");
+      router.push(routes.account.signIn);
     },
   });
 
@@ -37,7 +38,7 @@ const AddRunPage = () => {
         location: location || null,
       },
       {
-        onSuccess: () => router.push("/running"),
+        onSuccess: () => router.push(routes.running.i),
       }
     );
   };
