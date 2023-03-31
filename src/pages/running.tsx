@@ -16,7 +16,7 @@ import { trpc } from "../utils/trpc";
 
 type WeekType = {
   block: string;
-  grade?: number;
+  grade?: 0 | 1 | 2 | 3 | 4;
   hasEvent: boolean;
 };
 
@@ -73,7 +73,9 @@ const RunningPage = () => {
   distances.forEach((v, i) => {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     weeks[i]!.grade =
-      distances[i] === 0 ? 0 : Math.ceil((1 / (maxDistance / v)) * 4);
+      distances[i] === 0
+        ? 0
+        : (Math.ceil((1 / (maxDistance / v)) * 4) as 1 | 2 | 3 | 4);
   });
 
   const filteredRuns = runs?.filter(
