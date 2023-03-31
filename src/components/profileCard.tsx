@@ -48,7 +48,7 @@ const ProfileCard = ({ cta, profile }: ProfileCardProps) => {
         </div>
       )}
       <Link href="/running">
-        <a className="mx-auto my-2 w-min whitespace-nowrap rounded-full bg-prime-600 py-2 px-4 text-2xl font-extrabold text-white hover:bg-prime-700">
+        <a className="mx-auto my-2 w-min whitespace-nowrap rounded-full bg-prime-600 py-2 px-4 text-2xl font-extrabold text-white transition-colors duration-200 hover:bg-prime-700">
           {cta.label}
         </a>
       </Link>
@@ -67,7 +67,7 @@ const ProfileLink = (props: pathType) => {
       <a
         target="_blank"
         aria-label={props.label}
-        className="rounded-md bg-black/10 p-1 px-2 text-lg text-black/80 hover:bg-gray-300 dark:text-gray-400 md:hover:bg-prime-700 md:hover:text-white"
+        className="rounded-md bg-black/10 p-1 px-2 text-lg text-black/80 transition-colors duration-200 hover:bg-gray-300 dark:text-gray-400 md:hover:bg-prime-700 md:hover:text-white"
       >
         <FontAwesomeIcon icon={props.icon} className="aspect-square" />
       </a>
