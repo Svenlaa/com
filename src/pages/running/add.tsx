@@ -37,12 +37,7 @@ const AddRunPage = () => {
         location: location || null,
       },
       {
-        onSuccess: () => {
-          setDate("");
-          setDistance("");
-          setTime("");
-          setLocation("");
-        },
+        onSuccess: () => router.push("/running"),
       }
     );
   };
