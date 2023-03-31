@@ -104,7 +104,7 @@ const RunningPage = () => {
             <FontAwesomeIcon icon={faArrowRight} />
           </button>
         </div>
-        <div className="grid grid-cols-12 gap-2 rounded-md p-2 md:gap-2">
+        <div className="grid grid-cols-12 gap-[0.2rem] rounded-md p-2 md:gap-2">
           {weeks.map((week) => (
             <ActivityBlock
               key={week.block}
