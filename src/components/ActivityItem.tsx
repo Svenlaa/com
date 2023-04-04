@@ -5,12 +5,14 @@ import {
   faRoute,
   faTrash,
   IconDefinition,
+  faCalendarPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Run } from "@prisma/client";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";
 import { formatToTimeString } from "../utils/time";
+import Link from "next/link";
 
 type Props = {
   item: Run;
@@ -39,14 +41,23 @@ const ActivityItem = ({ item, showDelete, onDelete = () => null }: Props) => {
         >
           {dateString}
         </p>
-        {showDelete && (
-          <button
-            className="ml-1 text-red-600 hover:text-red-500 dark:text-red-400"
-            onClick={() => onDelete(item.id)}
-          >
-            <FontAwesomeIcon icon={faTrash} />
-          </button>
-        )}
+        <div className="flex flex-row gap-2">
+          {!item.time && (
+            <Link href={`/running/${item.id}/update`}>
+              <a className="ml-1 text-amber-600 hover:text-amber-500 dark:text-amber-400">
+                <FontAwesomeIcon icon={faCalendarPlus} />
+              </a>
+            </Link>
+          )}
+          {showDelete && (
+            <button
+              className="ml-1 text-red-600 hover:text-red-500 dark:text-red-400"
+              onClick={() => onDelete(item.id)}
+            >
+              <FontAwesomeIcon icon={faTrash} />
+            </button>
+          )}
+        </div>
       </div>
       <div className="mt-2 flex flex-row flex-nowrap justify-between">
         {item.location && !item.time && (

@@ -3,7 +3,7 @@ import { z } from "zod";
 import { formatDate, formatYearWeek } from "../../../utils/date";
 
 export const runningRouter = router({
-  getAll: publicProcedure
+  all: publicProcedure
     .input(z.number().default(new Date().getFullYear()))
     .query(async ({ input, ctx }) => {
       return await ctx.prisma.run.findMany({
@@ -17,6 +17,11 @@ export const runningRouter = router({
         },
       });
     }),
+  get: publicProcedure.input(z.string()).query(async ({ input, ctx }) => {
+    return await ctx.prisma.run.findUnique({
+      where: { id: input },
+    });
+  }),
   create: protectedProcedure
     .input(
       z.object({
@@ -41,7 +46,24 @@ export const runningRouter = router({
         },
       });
     }),
-  deleteItem: protectedProcedure
+  addTime: protectedProcedure
+    .input(
+      z.object({
+        id: z.string(),
+        time: z.number().nullable(),
+      })
+    )
+    .mutation(async ({ input, ctx }) => {
+      if (!ctx.session.user.isAdmin)
+        throw Error("You are not authorized to create runs");
+      return await ctx.prisma.run.update({
+        where: { id: input.id },
+        data: {
+          time: input.time,
+        },
+      });
+    }),
+  delete: protectedProcedure
     .input(z.string())
     .mutation(async ({ input, ctx }) => {
       const run = input;

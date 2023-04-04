@@ -34,13 +34,13 @@ const RunningPage = () => {
   const amountOfWeeks = getWeeksInYear(year);
   const weeks: WeekType[] = [];
   const utils = trpc.useContext();
-  const getRunsQuery = trpc.running.getAll;
+  const getRunsQuery = trpc.running.all;
   const { isLoading, data: runs, isError } = getRunsQuery.useQuery(year);
-  const deleteMutation = trpc.running.deleteItem.useMutation();
+  const deleteMutation = trpc.running.delete.useMutation();
   const onDelete = (runId: string) => {
     deleteMutation.mutate(runId, {
       onSuccess: () => {
-        utils.running.getAll.invalidate();
+        utils.running.all.invalidate();
       },
     });
   };
