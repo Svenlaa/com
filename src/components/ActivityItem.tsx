@@ -16,11 +16,15 @@ import Link from "next/link";
 
 type Props = {
   item: Run;
-  showDelete?: boolean;
+  isAuthed?: boolean;
   onDelete?: (runId: string) => void;
 };
 
-const ActivityItem = ({ item, showDelete, onDelete = () => null }: Props) => {
+const ActivityItem = ({
+  item,
+  isAuthed: isAuthed,
+  onDelete = () => null,
+}: Props) => {
   const router = useRouter();
   const dateString = new Date(item.date).toLocaleDateString(router.locale, {
     dateStyle: "long",
@@ -41,23 +45,23 @@ const ActivityItem = ({ item, showDelete, onDelete = () => null }: Props) => {
         >
           {dateString}
         </p>
-        <div className="flex flex-row gap-2">
-          {!item.time && (
-            <Link href={`/running/${item.id}/addTime`}>
-              <a className="ml-1 text-amber-600 hover:text-amber-500 dark:text-amber-400">
-                <FontAwesomeIcon icon={faCalendarPlus} />
-              </a>
-            </Link>
-          )}
-          {showDelete && (
+        {isAuthed && (
+          <div className="flex flex-row gap-2">
+            {!item.time && (
+              <Link href={`/running/${item.id}/addTime`}>
+                <a className="ml-1 text-amber-600 hover:text-amber-500 dark:text-amber-400">
+                  <FontAwesomeIcon icon={faCalendarPlus} />
+                </a>
+              </Link>
+            )}
             <button
               className="ml-1 text-red-600 hover:text-red-500 dark:text-red-400"
               onClick={() => onDelete(item.id)}
             >
               <FontAwesomeIcon icon={faTrash} />
             </button>
-          )}
-        </div>
+          </div>
+        )}
       </div>
       <div className="mt-2 flex flex-row flex-nowrap justify-between">
         {item.location && !item.time && (
