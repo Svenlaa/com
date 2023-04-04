@@ -143,7 +143,7 @@ const RunningPage = () => {
         {filteredRuns?.map((run) => (
           <ActivityItem
             item={run}
-            isAuthed={session?.user !== null}
+            isAuthed={!!session?.user}
             key={run.id}
             onDelete={onDelete}
           />
