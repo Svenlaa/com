@@ -20,7 +20,7 @@ export const prisma =
   });
 
 const poolConnection = mysql.createPool(env.DATABASE_URL);
-export const db = drizzle(poolConnection);
+export const db = global.db || drizzle(poolConnection);
 
 if (env.NODE_ENV !== "production") {
   global.prisma = prisma;
