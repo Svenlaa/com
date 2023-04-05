@@ -9,7 +9,7 @@ declare global {
   var prisma: PrismaClient | undefined;
 
   // eslint-disable-next-line no-var
-  var db: MySql2Database;
+  var db: MySql2Database | undefined;
 }
 
 export const prisma =
