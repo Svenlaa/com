@@ -1,4 +1,4 @@
-import { protectedProcedure, publicProcedure, router } from "../trpc";
+import { adminProcedure, publicProcedure, router } from "../trpc";
 import { z } from "zod";
 import { formatDate, formatYearWeek } from "../../../utils/date";
 
@@ -22,7 +22,7 @@ export const runningRouter = router({
       where: { id: input },
     });
   }),
-  create: protectedProcedure
+  create: adminProcedure
     .input(
       z.object({
         date: z.string().length(10).default(formatDate(new Date())),
@@ -34,8 +34,6 @@ export const runningRouter = router({
     .mutation(async ({ input, ctx }) => {
       const date = input.date;
       const yearWeek = formatYearWeek(new Date(date));
-      if (!ctx.session.user.isAdmin)
-        throw Error("You are not authorized to create runs");
       return await ctx.prisma.run.create({
         data: {
           date,
@@ -46,7 +44,7 @@ export const runningRouter = router({
         },
       });
     }),
-  addTime: protectedProcedure
+  addTime: adminProcedure
     .input(
       z.object({
         id: z.string(),
@@ -54,8 +52,6 @@ export const runningRouter = router({
       })
     )
     .mutation(async ({ input, ctx }) => {
-      if (!ctx.session.user.isAdmin)
-        throw Error("You are not authorized to create runs");
       return await ctx.prisma.run.update({
         where: { id: input.id },
         data: {
@@ -63,15 +59,9 @@ export const runningRouter = router({
         },
       });
     }),
-  delete: protectedProcedure
-    .input(z.string())
-    .mutation(async ({ input, ctx }) => {
-      const run = input;
-      if (!ctx.session.user.isAdmin)
-        throw Error("You are not authorized to delete runs");
-
-      return await ctx.prisma.run.delete({
-        where: { id: run },
-      });
-    }),
+  delete: adminProcedure.input(z.string()).mutation(async ({ input, ctx }) => {
+    return await ctx.prisma.run.delete({
+      where: { id: input },
+    });
+  }),
 });

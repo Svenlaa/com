@@ -18,11 +18,15 @@ export const publicProcedure = t.procedure;
 
 /**
  * Reusable middleware to ensure
- * users are logged in
+ * users have admin privileges
  */
-const isAuthed = t.middleware(({ ctx, next }) => {
-  if (!ctx.session || !ctx.session.user) {
-    throw new TRPCError({ code: "UNAUTHORIZED" });
+
+const isAdmin = t.middleware(({ ctx, next }) => {
+  if (!ctx.session || !ctx.session.user || !ctx.session.user.isAdmin) {
+    throw new TRPCError({
+      code: "UNAUTHORIZED",
+      message: "You aren't an admin",
+    });
   }
   return next({
     ctx: {
@@ -33,6 +37,24 @@ const isAuthed = t.middleware(({ ctx, next }) => {
 });
 
 /**
- * Protected procedure
- **/
+ * Reusable middleware to ensure
+ * users are logged in
+ */
+const isAuthed = t.middleware(({ ctx, next }) => {
+  if (!ctx.session || !ctx.session.user) {
+    throw new TRPCError({
+      code: "UNAUTHORIZED",
+      message: "You aren't logged in",
+    });
+  }
+  return next({
+    ctx: {
+      // infers the `session` as non-nullable
+      session: { ...ctx.session, user: ctx.session.user },
+    },
+  });
+});
+
 export const protectedProcedure = t.procedure.use(isAuthed);
+
+export const adminProcedure = t.procedure.use(isAdmin);
