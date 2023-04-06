@@ -1,7 +1,7 @@
 import { protectedProcedure, publicProcedure, router } from "../trpc";
 import { z } from "zod";
 import { formatDate, formatYearWeek } from "../../../utils/date";
-import { tbRuns } from "../../db/schema";
+import { Run } from "../../db/schema";
 import { desc, eq, like } from "drizzle-orm/expressions";
 import { createId } from "@paralleldrive/cuid2";
 
@@ -11,12 +11,12 @@ export const runningRouter = router({
     .query(async ({ input, ctx }) => {
       return await ctx.db
         .select()
-        .from(tbRuns)
-        .where(like(tbRuns.yearWeek, `${input}w%`))
-        .orderBy(desc(tbRuns.date));
+        .from(Run)
+        .where(like(Run.yearWeek, `${input}w%`))
+        .orderBy(desc(Run.date));
     }),
   get: publicProcedure.input(z.string()).query(async ({ input, ctx }) => {
-    return (await ctx.db.select().from(tbRuns).where(eq(tbRuns.id, input)))[0];
+    return (await ctx.db.select().from(Run).where(eq(Run.id, input)))[0];
   }),
   create: protectedProcedure
     .input(
@@ -32,7 +32,7 @@ export const runningRouter = router({
       const yearWeek = formatYearWeek(new Date(date));
       if (!ctx.session.user.isAdmin)
         throw Error("You are not authorized to create runs");
-      return await ctx.db.insert(tbRuns).values({
+      return await ctx.db.insert(Run).values({
         id: createId(),
         date,
         distance: input.distance,
@@ -52,9 +52,9 @@ export const runningRouter = router({
       if (!ctx.session.user.isAdmin)
         throw Error("You are not authorized to create runs");
       return await ctx.db
-        .update(tbRuns)
+        .update(Run)
         .set({ time: input.time })
-        .where(eq(tbRuns.id, input.id));
+        .where(eq(Run.id, input.id));
     }),
   delete: protectedProcedure
     .input(z.string())
@@ -63,6 +63,6 @@ export const runningRouter = router({
       if (!ctx.session.user.isAdmin)
         throw Error("You are not authorized to delete runs");
 
-      return await ctx.db.delete(tbRuns).where(eq(tbRuns.id, run));
+      return await ctx.db.delete(Run).where(eq(Run.id, run));
     }),
 });

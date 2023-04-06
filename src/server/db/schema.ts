@@ -1,19 +1,14 @@
-import {
-  boolean,
-  mediumint,
-  text,
-  varchar,
-} from "drizzle-orm/mysql-core/columns";
+import { boolean, mediumint, varchar } from "drizzle-orm/mysql-core/columns";
 import { mysqlTable } from "drizzle-orm/mysql-core/table";
 
-export const tbRuns = mysqlTable("Run", {
-  id: text("id").primaryKey(),
+export const Run = mysqlTable("Run", {
+  id: varchar("id", { length: 191 }).primaryKey(),
   distance: mediumint("distance").notNull(),
   time: mediumint("time"),
   date: varchar("date", { length: 10 }).notNull(),
   yearWeek: varchar("yearWeek", { length: 7 }).notNull(),
   isEvent: boolean("isEvent").default(false).notNull(),
-  location: text("location"),
+  location: varchar("location", { length: 191 }),
 });
 
 //TODO Complete the schema.
