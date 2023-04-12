@@ -1,26 +1,22 @@
 import { adminProcedure, publicProcedure, router } from "../trpc";
 import { z } from "zod";
 import { formatDate, formatYearWeek } from "../../../utils/date";
+import { Run } from "../../db/schema";
+import { desc, eq, like } from "drizzle-orm/expressions";
+import { createId } from "@paralleldrive/cuid2";
 
 export const runningRouter = router({
   all: publicProcedure
     .input(z.number().default(new Date().getFullYear()))
     .query(async ({ input, ctx }) => {
-      return await ctx.prisma.run.findMany({
-        where: {
-          AND: {
-            yearWeek: { startsWith: `${input}w` },
-          },
-        },
-        orderBy: {
-          date: "desc",
-        },
-      });
+      return await ctx.db
+        .select()
+        .from(Run)
+        .where(like(Run.yearWeek, `${input}w%`))
+        .orderBy(desc(Run.date));
     }),
   get: publicProcedure.input(z.string()).query(async ({ input, ctx }) => {
-    return await ctx.prisma.run.findUnique({
-      where: { id: input },
-    });
+    return (await ctx.db.select().from(Run).where(eq(Run.id, input)))[0];
   }),
   create: adminProcedure
     .input(
@@ -34,14 +30,15 @@ export const runningRouter = router({
     .mutation(async ({ input, ctx }) => {
       const date = input.date;
       const yearWeek = formatYearWeek(new Date(date));
-      return await ctx.prisma.run.create({
-        data: {
-          date,
-          distance: input.distance,
-          time: input.time,
-          yearWeek,
-          location: input.location,
-        },
+      if (!ctx.session.user.isAdmin)
+        throw Error("You are not authorized to create runs");
+      return await ctx.db.insert(Run).values({
+        id: createId(),
+        date,
+        distance: input.distance,
+        time: input.time,
+        yearWeek,
+        location: input.location,
       });
     }),
   addTime: adminProcedure
@@ -52,16 +49,20 @@ export const runningRouter = router({
       })
     )
     .mutation(async ({ input, ctx }) => {
-      return await ctx.prisma.run.update({
-        where: { id: input.id },
-        data: {
-          time: input.time,
-        },
-      });
+      if (!ctx.session.user.isAdmin)
+        throw Error("You are not authorized to create runs");
+      return await ctx.db
+        .update(Run)
+        .set({ time: input.time })
+        .where(eq(Run.id, input.id));
     }),
-  delete: adminProcedure.input(z.string()).mutation(async ({ input, ctx }) => {
-    return await ctx.prisma.run.delete({
-      where: { id: input },
-    });
-  }),
+  delete: protectedProcedure
+    .input(z.string())
+    .mutation(async ({ input, ctx }) => {
+      const run = input;
+      if (!ctx.session.user.isAdmin)
+        throw Error("You are not authorized to delete runs");
+
+      return await ctx.db.delete(Run).where(eq(Run.id, run));
+    }),
 });
