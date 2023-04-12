@@ -11,14 +11,14 @@ import { mysqlTable } from "drizzle-orm/mysql-core/table";
 
 const string = (name: string) => varchar(name, { length: 191 });
 
-export const Example = mysqlTable("example", {
+export const Example = mysqlTable("Example", {
   id: string("id").primaryKey().notNull(),
   createdAt: datetime("createdAt", { fsp: 3 }).default(new Date()).notNull(),
   updatedAt: datetime("updatedAt", { fsp: 3 }).notNull(),
 });
 
 export const Account = mysqlTable(
-  "account",
+  "Account",
   {
     id: string("id").notNull().primaryKey(),
     userId: string("userId")
@@ -43,7 +43,7 @@ export const Account = mysqlTable(
 );
 
 export const Session = mysqlTable(
-  "session",
+  "Session",
   {
     id: string("id").notNull().primaryKey(),
     sessionToken: string("sessionToken").notNull(),
@@ -60,7 +60,7 @@ export const Session = mysqlTable(
 );
 
 export const User = mysqlTable(
-  "user",
+  "User",
   {
     id: string("id").notNull().primaryKey(),
     name: string("name"),
@@ -75,7 +75,7 @@ export const User = mysqlTable(
 );
 
 export const verificationToken = mysqlTable(
-  "verificationToken",
+  "VerificationToken",
   {
     id: string("identifier").notNull(),
     token: string("token").notNull(),
@@ -91,7 +91,7 @@ export const verificationToken = mysqlTable(
   })
 );
 
-export const Run = mysqlTable("run", {
+export const Run = mysqlTable("Run", {
   id: string("id").primaryKey(),
   distance: mediumint("distance").notNull(),
   time: mediumint("time"),
