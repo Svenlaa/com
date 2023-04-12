@@ -42,9 +42,37 @@ export const Account = mysqlTable(
   })
 );
 
-//TODO Session
+export const Session = mysqlTable(
+  "session",
+  {
+    id: string("id").notNull().primaryKey(),
+    sessionToken: string("sessionToken").notNull(),
+    userId: string("userId")
+      .notNull()
+      .references(() => User.id, { onDelete: "cascade", onUpdate: "cascade" }),
+    expires: datetime("expires", { fsp: 3 }).notNull(),
+  },
+  (table) => ({
+    Session_sessionToken_key: uniqueIndex("Session_sessionToken_key").on(
+      table.sessionToken
+    ),
+  })
+);
 
-//TODO User
+export const User = mysqlTable(
+  "user",
+  {
+    id: string("id").notNull().primaryKey(),
+    name: string("name"),
+    email: string("email"),
+    emailVerified: datetime("emailVerified", { fsp: 3 }),
+    image: string("image"),
+    isAdmin: boolean("isAdmin").default(false).notNull(),
+  },
+  (table) => ({
+    User_email_key: uniqueIndex("User_email_key").on(table.email),
+  })
+);
 
 export const verificationToken = mysqlTable(
   "verificationToken",
