@@ -3,7 +3,7 @@ import GithubProvider from "next-auth/providers/github";
 
 // Prisma adapter for NextAuth, optional and can be removed
 import { env } from "../../../env/server.mjs";
-import { DrizzleAdapter } from "./DrizzleAdapter";
+import { DrizzleAdapter } from "../../../server/db/adapter";
 import { db } from "../../../server/db/client";
 
 export const authOptions: NextAuthOptions = {

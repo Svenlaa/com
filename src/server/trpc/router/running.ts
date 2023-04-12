@@ -56,13 +56,11 @@ export const runningRouter = router({
         .set({ time: input.time })
         .where(eq(Run.id, input.id));
     }),
-  delete: protectedProcedure
-    .input(z.string())
-    .mutation(async ({ input, ctx }) => {
-      const run = input;
-      if (!ctx.session.user.isAdmin)
-        throw Error("You are not authorized to delete runs");
+  delete: adminProcedure.input(z.string()).mutation(async ({ input, ctx }) => {
+    const run = input;
+    if (!ctx.session.user.isAdmin)
+      throw Error("You are not authorized to delete runs");
 
-      return await ctx.db.delete(Run).where(eq(Run.id, run));
-    }),
+    return await ctx.db.delete(Run).where(eq(Run.id, run));
+  }),
 });

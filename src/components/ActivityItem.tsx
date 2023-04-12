@@ -8,14 +8,14 @@ import {
   faCalendarPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Run } from "@prisma/client";
+import { TRun } from "../server/db/schema";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";
 import { formatToTimeString } from "../utils/time";
 import Link from "next/link";
 
 type Props = {
-  item: Run;
+  item: TRun;
   isAuthed?: boolean;
   onDelete?: (runId: string) => void;
 };

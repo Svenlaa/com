@@ -8,7 +8,10 @@ import Input from "../../../components/form/input";
 import { GetStaticPaths, GetStaticProps } from "next";
 import pick from "lodash/pick";
 import { useTranslations } from "next-intl";
-import { PrismaClient } from "@prisma/client";
+import { Run } from "../../../server/db/schema";
+import { drizzle } from "drizzle-orm/planetscale-serverless";
+import { connect } from "@planetscale/database";
+import { env } from "../../../env/server.mjs";
 
 const AddTimePage = () => {
   const router = useRouter();
@@ -76,10 +79,9 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => ({
 });
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const res = await new PrismaClient().run.findMany({ select: { id: true } });
-  const paths = res.map((item) => ({
-    params: { id: item.id },
-  }));
+  const db = drizzle(connect({ url: env.DATABASE_URL }));
+  const res = await db.select({ id: Run.id }).from(Run).execute();
+  const paths = res.map((item) => ({ params: { id: item.id } }));
   return {
     paths,
     fallback: true,

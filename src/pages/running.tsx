@@ -1,6 +1,5 @@
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Run } from "@prisma/client";
 import { pick } from "lodash";
 import { GetStaticProps } from "next";
 import { useSession } from "next-auth/react";
@@ -13,6 +12,7 @@ import ActivityItem from "../components/ActivityItem";
 import MainLayout from "../layouts/common";
 import { getWeeksInYear } from "../utils/date";
 import { trpc } from "../utils/trpc";
+import { TRun } from "../server/db/schema";
 
 type WeekType = {
   block: string;
@@ -20,7 +20,7 @@ type WeekType = {
   hasEvent: boolean;
 };
 
-const sumDistance = (currentSum: number, run: Run) =>
+const sumDistance = (currentSum: number, run: TRun) =>
   run.time ? currentSum + run.distance : currentSum;
 
 const RunningPage = () => {

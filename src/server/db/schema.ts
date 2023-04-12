@@ -8,8 +8,16 @@ import {
 } from "drizzle-orm/mysql-core/columns";
 import { uniqueIndex } from "drizzle-orm/mysql-core/indexes";
 import { mysqlTable } from "drizzle-orm/mysql-core/table";
+import { InferModel } from "drizzle-orm";
 
 const string = (name: string) => varchar(name, { length: 191 });
+
+export type TExample = InferModel<typeof Example>;
+export type TAccount = InferModel<typeof Account>;
+export type TSession = InferModel<typeof Session>;
+export type TUser = InferModel<typeof User>;
+export type TVerificationToken = InferModel<typeof VerificationToken>;
+export type TRun = InferModel<typeof Run>;
 
 export const Example = mysqlTable("Example", {
   id: string("id").primaryKey().notNull(),
@@ -74,7 +82,7 @@ export const User = mysqlTable(
   })
 );
 
-export const verificationToken = mysqlTable(
+export const VerificationToken = mysqlTable(
   "VerificationToken",
   {
     id: string("identifier").notNull(),
