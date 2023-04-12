@@ -4,7 +4,7 @@
 - **Styling**: [Tailwind](https://tailwindcss.org)
 - **i18n**: [Next-Intl](https://next-intl-docs.vercel.app)
 - **Authentication**: [NextAuth.js](https://next-auth.js.org)
-- **ORM**: [Prisma](https://prisma.io/)
+- **ORM**: [Drizzle](https://github.com/drizzle-team/drizzle-orm)
 - **Database**: [PlanetScale](https://planetscale.com)
 - **Deployment**: [Vercel](https://vercel.com)
 
