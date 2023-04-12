@@ -1,4 +1,4 @@
-import { protectedProcedure, publicProcedure, router } from "../trpc";
+import { adminProcedure, publicProcedure, router } from "../trpc";
 import { z } from "zod";
 import { formatDate, formatYearWeek } from "../../../utils/date";
 import { Run } from "../../db/schema";
@@ -18,7 +18,7 @@ export const runningRouter = router({
   get: publicProcedure.input(z.string()).query(async ({ input, ctx }) => {
     return (await ctx.db.select().from(Run).where(eq(Run.id, input)))[0];
   }),
-  create: protectedProcedure
+  create: adminProcedure
     .input(
       z.object({
         date: z.string().length(10).default(formatDate(new Date())),
@@ -41,7 +41,7 @@ export const runningRouter = router({
         location: input.location,
       });
     }),
-  addTime: protectedProcedure
+  addTime: adminProcedure
     .input(
       z.object({
         id: z.string(),
