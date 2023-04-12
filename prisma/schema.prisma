@@ -20,7 +20,6 @@ model Example {
   updatedAt DateTime @updatedAt
 }
 
-// Necessary for Next auth
 model Account {
   id                String  @id @default(cuid())
   userId            String
@@ -39,6 +38,7 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
+//TODO
 model Session {
   id           String   @id @default(cuid())
   sessionToken String   @unique
@@ -47,6 +47,7 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
+//TODO
 model User {
   id            String    @id @default(cuid())
   name          String?
