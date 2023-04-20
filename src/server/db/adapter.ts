@@ -22,7 +22,7 @@ export const DrizzleAdapter = (db: typeof dbType): Adapter => {
         .values({ ...data, id: createId() })
         .execute();
       const res = await db.select().from(User).where(eq(User.id, id));
-      return pretend<AdapterUser>(res);
+      return pretend<AdapterUser>(res ?? null);
     },
     getUser: async (id) => {
       const res = await db
@@ -34,8 +34,8 @@ export const DrizzleAdapter = (db: typeof dbType): Adapter => {
         })
         .from(User)
         .where(eq(User.id, id))
-        .execute();
-      return pretend<AdapterUser>(res);
+        .then((res) => res[0]);
+      return pretend<AdapterUser>(res ?? null);
     },
     getSessionAndUser: async (sessionToken) => {
       const res = await db
@@ -43,8 +43,10 @@ export const DrizzleAdapter = (db: typeof dbType): Adapter => {
         .from(Session)
         .where(eq(Session.sessionToken, sessionToken))
         .innerJoin(User, eq(User.id, Session.userId))
-        .execute();
-      return pretend<{ session: AdapterSession; user: AdapterUser }>(res[0]);
+        .then((res) => res[0]);
+      return pretend<{ session: AdapterSession; user: AdapterUser }>(
+        res ?? null
+      );
     },
     getUserByAccount: async (account) => {
       const res = await db
@@ -63,8 +65,8 @@ export const DrizzleAdapter = (db: typeof dbType): Adapter => {
             eq(Account.provider, account.provider)
           )
         )
-        .execute();
-      return pretend<AdapterUser>(res[0]);
+        .then((res) => res[0]);
+      return pretend<AdapterUser>(res ?? null);
     },
     createSession: async (session) => {
       const id = createId();
@@ -72,12 +74,20 @@ export const DrizzleAdapter = (db: typeof dbType): Adapter => {
         .insert(Session)
         .values({ ...session, id })
         .execute();
-      const res = await db.select().from(Session).where(eq(Session.id, id));
-      return pretend<AdapterSession>(res[0]);
+      const res = await db
+        .select()
+        .from(Session)
+        .where(eq(Session.id, id))
+        .then((res) => res[0]);
+      return pretend<AdapterSession>(res ?? null);
     },
     getUserByEmail: async (email) => {
-      const res = await db.select().from(User).where(eq(User.email, email));
-      return pretend<AdapterUser>(res[0]);
+      const res = await db
+        .select()
+        .from(User)
+        .where(eq(User.email, email))
+        .then((res) => res[0]);
+      return pretend<AdapterUser>(res ?? null);
     },
     deleteSession: async (sessionToken) => {
       await db
