@@ -1,7 +1,7 @@
 # Svenlaa.com
 
 - **Framework**: [Next.js](https://nextjs.org)
-- **Styling**: [Tailwind](https://tailwindcss.org)
+- **Styling**: [Tailwind](https://tailwindcss.com)
 - **i18n**: [Next-Intl](https://next-intl-docs.vercel.app)
 - **Authentication**: [NextAuth.js](https://next-auth.js.org)
 - **ORM**: [Drizzle](https://github.com/drizzle-team/drizzle-orm)
