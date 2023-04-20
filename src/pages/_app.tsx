@@ -17,6 +17,7 @@ const MyApp: AppType<{ session: Session | null; messages: IntlMessages }> = ({
         <Head>
           <title>Svenlaa</title>
           <meta name="description" content="Svenlaa's website" />
+          <meta name="author" content="Sven Lammertink" />
         </Head>
         <Component {...pageProps} />
       </NextIntlProvider>
