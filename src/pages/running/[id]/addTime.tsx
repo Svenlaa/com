@@ -2,7 +2,6 @@ import { useRouter } from "next/router";
 import { trpc } from "../../../utils/trpc";
 import { useSession } from "next-auth/react";
 import { FormEvent, useState } from "react";
-import routes from "../../../utils/routes";
 import MainLayout from "../../../layouts/common";
 import Input from "../../../components/form/input";
 import { GetStaticPaths, GetStaticProps } from "next";
@@ -20,7 +19,7 @@ const AddTimePage = () => {
   useSession({
     required: true,
     onUnauthenticated: () => {
-      router.push(routes.account.signIn);
+      router.push('/api/auth/signin');
     },
   });
   const [time, setTime] = useState("");
@@ -36,7 +35,7 @@ const AddTimePage = () => {
 
     addTime.mutate(
       { id: runId, time: timeInSeconds },
-      { onSuccess: () => router.push(routes.running.i) }
+      { onSuccess: () => router.push('/running') }
     );
   };
 
