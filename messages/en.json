@@ -5,8 +5,7 @@
     "cv": "CV"
   },
   "Home": {
-    "cta_label": "Running Activity",
-    "cta_message": "Coming soon..."
+    "cta_label": "Running Activity"
   },
   "Running": {
     "add": "Add a run",

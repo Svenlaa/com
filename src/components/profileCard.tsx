@@ -12,12 +12,10 @@ export type Profile = {
 
 type ProfileCardProps = {
   profile: Profile;
-  cta: {
-    label: string;
-    message: string;
-  };
+  buttonTxt: string;
 };
-const ProfileCard = ({ cta, profile }: ProfileCardProps) => {
+
+const ProfileCard = ({ buttonTxt, profile }: ProfileCardProps) => {
   return (
     <div className="m-4 flex flex-col rounded-2xl bg-white/50 p-8 pb-4 drop-shadow-2xl dark:bg-white/10">
       <span className="relative mx-auto h-72 w-72">
@@ -49,7 +47,7 @@ const ProfileCard = ({ cta, profile }: ProfileCardProps) => {
       )}
       <Link href="/running">
         <a className="mx-auto my-2 w-min whitespace-nowrap rounded-full bg-prime-600 py-2 px-4 text-2xl font-extrabold text-white transition-colors duration-200 hover:bg-prime-700">
-          {cta.label}
+          {buttonTxt}
         </a>
       </Link>
     </div>

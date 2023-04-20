@@ -36,10 +36,7 @@ const HomePage = () => {
 
   return (
     <CommonLayout className="flex h-full items-center justify-center">
-      <ProfileCard
-        cta={{ label: t("cta_label"), message: t("cta_message") }}
-        profile={profile}
-      />
+      <ProfileCard buttonTxt={t("cta_label")} profile={profile} />
     </CommonLayout>
   );
 };
