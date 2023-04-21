@@ -1,16 +1,15 @@
 // src/server/db/client.ts
 import { env } from "../../env/server.mjs";
-import {
-  PlanetScaleDatabase,
-  drizzle,
-} from "drizzle-orm/planetscale-serverless";
-import { connect } from "@planetscale/database";
+import { MySql2Database, drizzle } from "drizzle-orm/mysql2";
+import mysql from "mysql2/promise";
 
 declare global {
   // eslint-disable-next-line no-var
-  var db: PlanetScaleDatabase | undefined;
+  var db: MySql2Database | undefined;
 }
-const connection = connect({ url: env.DATABASE_URL });
+
+const connection = mysql.createPool(env.DATABASE_URL);
+
 export const db = global.db || drizzle(connection);
 
 if (env.NODE_ENV !== "production") {

@@ -6,7 +6,9 @@
     "build": "next build",
     "dev": "next dev --port 2000",
     "lint": "next lint",
-    "start": "next start --port 2000"
+    "start": "next start --port 2000",
+    "drizzle:generate": "drizzle-kit generate:mysql --schema=./src/server/db/schema.ts",
+    "drizzle:up": "drizzle-kit up:mysql"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
@@ -24,6 +26,7 @@
     "dayjs": "^1.11.6",
     "drizzle-orm": "^0.23.6",
     "lodash": "^4.17.21",
+    "mysql2": "^3.2.3",
     "next": "12.3.1",
     "next-auth": "^4.12.3",
     "next-intl": "^2.8.0",

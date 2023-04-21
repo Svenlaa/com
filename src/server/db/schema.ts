@@ -10,7 +10,7 @@ import { uniqueIndex } from "drizzle-orm/mysql-core/indexes";
 import { mysqlTable } from "drizzle-orm/mysql-core/table";
 import { InferModel } from "drizzle-orm";
 
-const string = (name: string) => varchar(name, { length: 191 });
+const string = (name: string) => varchar(name, { length: 255 });
 
 export type TExample = InferModel<typeof Example>;
 export type TAccount = InferModel<typeof Account>;
