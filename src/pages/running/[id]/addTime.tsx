@@ -8,8 +8,8 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import pick from "lodash/pick";
 import { useTranslations } from "next-intl";
 import { Run } from "../../../server/db/schema";
-import { drizzle } from "drizzle-orm/planetscale-serverless";
-import { connect } from "@planetscale/database";
+import { drizzle } from "drizzle-orm/mysql2";
+import mysql from "mysql2/promise";
 import { env } from "../../../env/server.mjs";
 
 const AddTimePage = () => {
@@ -19,7 +19,7 @@ const AddTimePage = () => {
   useSession({
     required: true,
     onUnauthenticated: () => {
-      router.push('/api/auth/signin');
+      router.push("/api/auth/signin");
     },
   });
   const [time, setTime] = useState("");
@@ -35,7 +35,7 @@ const AddTimePage = () => {
 
     addTime.mutate(
       { id: runId, time: timeInSeconds },
-      { onSuccess: () => router.push('/running') }
+      { onSuccess: () => router.push("/running") }
     );
   };
 
@@ -78,7 +78,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => ({
 });
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const db = drizzle(connect({ url: env.DATABASE_URL }));
+  const db = drizzle(await mysql.createConnection(env.DATABASE_URL));
   const res = await db.select({ id: Run.id }).from(Run).execute();
   const paths = res.map((item) => ({ params: { id: item.id } }));
   return {
