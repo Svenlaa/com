@@ -5,7 +5,7 @@
 - **i18n**: [Next-Intl](https://next-intl-docs.vercel.app)
 - **Authentication**: [NextAuth.js](https://next-auth.js.org)
 - **ORM**: [Drizzle](https://github.com/drizzle-team/drizzle-orm)
-- **Database**: [MariaDB](https://mariadb.org/) on [Hertzner](hetzner.com)
+- **Database**: [MariaDB](https://mariadb.org/) on [Hertzner](https://hetzner.com)
 - **Deployment**: [Vercel](https://vercel.com)
 
 ## Running Locally
