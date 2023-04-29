@@ -13,7 +13,7 @@
 This application requires Node.js and pnpm
 
 ```bash
-git clone https://github.com/Svenlaa/home.git
+git clone https://github.com/Svenlaa/com.git
 cd home
 pnpm i
 pnpm dev
