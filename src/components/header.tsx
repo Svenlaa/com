@@ -30,7 +30,7 @@ const Header = () => {
 
   const currPath = useRouter().pathname;
   const [isOpen, setIsOpen] = useState(false);
-  const locl = useRouter().locale;
+  const locale = useRouter().locale;
 
   return (
     <header className="z-50 mx-auto w-screen md:container">
@@ -43,8 +43,12 @@ const Header = () => {
 
         {/* Section with hamburger for smaller screens */}
         <div className="flex flex-row md:hidden ">
-          {locl === "nl" && <Flag label="🇬🇧" code="en" langName="English" />}
-          {locl === "en" && <Flag label="🇳🇱" code="nl" langName="Nederlands" />}
+          {locale === "nl" && (
+            <Flag countryCode="gb" langCode="en" langName="English" />
+          )}
+          {locale === "en" && (
+            <Flag countryCode="nl" langCode="nl" langName="Nederlands" />
+          )}
           <button
             className="translate aspect-square rounded-full bg-prime-600 text-3xl text-white"
             aria-label="hamburger menu"
@@ -69,18 +73,18 @@ const Header = () => {
               {t(path.label)}
             </HeaderLink>
           ))}
-          {locl === "nl" && (
+          {locale === "nl" && (
             <Flag
-              label="🇬🇧"
-              code="en"
+              countryCode="gb"
+              langCode="en"
               langName="English"
               className="transition-text whitespace-nowrap rounded-md bg-white p-2 px-3 text-xl text-gray-800 delay-75 duration-500 ease-out hover:bg-prime-700 hover:text-white dark:bg-gray-800 dark:text-gray-400"
             />
           )}
-          {locl === "en" && (
+          {locale === "en" && (
             <Flag
-              label="🇳🇱"
-              code="nl"
+              countryCode="nl"
+              langCode="nl"
               langName="Nederlands"
               className="transition-text whitespace-nowrap rounded-md bg-white p-2 px-3 text-xl text-gray-800 delay-75 duration-500 ease-out hover:bg-prime-700 hover:text-white dark:bg-gray-800 dark:text-gray-400"
             />
