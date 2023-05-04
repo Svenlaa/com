@@ -52,7 +52,7 @@ const RunningPage = () => {
   const filter = router.query.filter ?? null;
 
   const runs = runData?.runs ?? [];
-  const firstYear = runData?.firstYear ?? 0;
+  const firstYear = runData?.firstYear ?? year;
   const currentYear = new Date().getFullYear();
   const yearlyDistance =
     isLoading || !runs ? 0 : runs.reduce(sumDistance, 0) / 1000;
