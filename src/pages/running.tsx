@@ -35,7 +35,8 @@ const RunningPage = () => {
   const weeks: WeekType[] = [];
   const utils = trpc.useContext();
   const getRunsQuery = trpc.running.all;
-  const { isLoading, data: runs, isError } = getRunsQuery.useQuery(year);
+  const { isLoading, data: runData, isError } = getRunsQuery.useQuery(year);
+
   const deleteMutation = trpc.running.delete.useMutation();
   const onDelete = (runId: string) => {
     deleteMutation.mutate(runId, {
@@ -50,6 +51,9 @@ const RunningPage = () => {
   const router = useRouter();
   const filter = router.query.filter ?? null;
 
+  const runs = runData?.runs ?? [];
+  const firstYear = runData?.firstYear ?? 0;
+  const currentYear = new Date().getFullYear();
   const yearlyDistance =
     isLoading || !runs ? 0 : runs.reduce(sumDistance, 0) / 1000;
 
@@ -89,6 +93,8 @@ const RunningPage = () => {
           <button
             onClick={() => setYear(year - 1)}
             aria-label={t("previous_year")}
+            disabled={year <= firstYear}
+            className="disabled:text-black/25 dark:disabled:text-white/25"
           >
             <FontAwesomeIcon icon={faArrowLeft} />
           </button>
@@ -98,7 +104,7 @@ const RunningPage = () => {
           <button
             aria-label={t("next_year")}
             onClick={() => setYear(year + 1)}
-            disabled={year >= new Date().getFullYear()}
+            disabled={year >= currentYear}
             className="disabled:text-black/25 dark:disabled:text-white/25"
           >
             <FontAwesomeIcon icon={faArrowRight} />
