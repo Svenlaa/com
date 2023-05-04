@@ -12,18 +12,11 @@ import { InferModel } from "drizzle-orm";
 
 const string = (name: string) => varchar(name, { length: 255 });
 
-export type TExample = InferModel<typeof Example>;
 export type TAccount = InferModel<typeof Account>;
 export type TSession = InferModel<typeof Session>;
 export type TUser = InferModel<typeof User>;
 export type TVerificationToken = InferModel<typeof VerificationToken>;
 export type TRun = InferModel<typeof Run>;
-
-export const Example = mysqlTable("Example", {
-  id: string("id").primaryKey().notNull(),
-  createdAt: datetime("createdAt", { fsp: 3 }).default(new Date()).notNull(),
-  updatedAt: datetime("updatedAt", { fsp: 3 }).notNull(),
-});
 
 export const Account = mysqlTable(
   "Account",
