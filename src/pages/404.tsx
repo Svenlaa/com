@@ -8,7 +8,10 @@ const NotFoundPage = () => {
 
   return (
     <CommonLayout className="flex h-full items-center justify-center">
-      <h1 className="text-5xl font-semibold">404: {t("page_not_found")}</h1>
+      <h1 className="flex flex-col items-center text-4xl font-semibold">
+        <b className="text-center text-8xl">404</b>
+        <span className="text-center">{t("page_not_found")}</span>
+      </h1>
     </CommonLayout>
   );
 };
