@@ -5,7 +5,7 @@ import {
   AdapterUser,
 } from "next-auth/adapters";
 import { db as dbType } from "./client";
-import { Account, Session, User } from "./schema";
+import { Account, Session, User } from "../../../drizzle/schema";
 import { createId } from "@paralleldrive/cuid2";
 import { and, eq } from "drizzle-orm/expressions";
 

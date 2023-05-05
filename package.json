@@ -7,7 +7,7 @@
     "dev": "next dev --port 2000",
     "lint": "next lint",
     "start": "next start --port 2000",
-    "drizzle:generate": "drizzle-kit generate:mysql --schema=./src/server/db/schema.ts",
+    "drizzle:generate": "drizzle-kit generate:mysql --schema=./drizzle/schema.ts",
     "drizzle:up": "drizzle-kit up:mysql"
   },
   "dependencies": {

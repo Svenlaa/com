@@ -12,7 +12,7 @@ import ActivityItem from "../components/ActivityItem";
 import MainLayout from "../layouts/common";
 import { getWeeksInYear } from "../utils/time";
 import { trpc } from "../utils/trpc";
-import { TRun } from "../server/db/schema";
+import { TRun } from "../../drizzle/schema";
 
 type WeekType = {
   block: string;

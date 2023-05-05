@@ -8,7 +8,7 @@ import {
   faCalendarPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { TRun } from "../server/db/schema";
+import { TRun } from "../../drizzle/schema";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";
 import { formatToTimeString } from "../utils/time";

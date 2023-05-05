@@ -7,7 +7,7 @@ import Input from "../../../components/form/input";
 import { GetStaticPaths, GetStaticProps } from "next";
 import pick from "lodash/pick";
 import { useTranslations } from "next-intl";
-import { Run } from "../../../server/db/schema";
+import { Run } from "../../../../drizzle/schema";
 import { drizzle } from "drizzle-orm/mysql2";
 import mysql from "mysql2/promise";
 import { env } from "../../../env/server.mjs";
