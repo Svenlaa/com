@@ -1,6 +1,6 @@
 import { adminProcedure, publicProcedure, router } from "../trpc";
 import { z } from "zod";
-import { formatDate, formatYearWeek } from "../../../utils/date";
+import { formatDate, formatYearWeek } from "../../../utils/time";
 import { Run } from "../../db/schema";
 import { desc, eq, like } from "drizzle-orm/expressions";
 import { createId } from "@paralleldrive/cuid2";

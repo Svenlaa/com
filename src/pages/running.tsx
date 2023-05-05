@@ -10,7 +10,7 @@ import { useState } from "react";
 import ActivityBlock from "../components/ActivityBlock";
 import ActivityItem from "../components/ActivityItem";
 import MainLayout from "../layouts/common";
-import { getWeeksInYear } from "../utils/date";
+import { getWeeksInYear } from "../utils/time";
 import { trpc } from "../utils/trpc";
 import { TRun } from "../server/db/schema";
 
