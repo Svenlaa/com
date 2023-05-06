@@ -1,2 +1,2 @@
-export const pad = (value: number, length: number): string =>
-  value.toString().padStart(length, "0");
+export const pad = (value: number, length: number, char = "0"): string =>
+  value.toString().padStart(length, char);

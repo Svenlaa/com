@@ -12,8 +12,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useTranslations } from "next-intl";
 import Flag from "./flag";
-import { currentUbt } from "../utils/time";
-import { pad } from "../utils/pad";
 
 type pathType = {
   href: string;
@@ -34,18 +32,12 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const locale = useRouter().locale;
 
-  const [ubt, setUbt] = useState(currentUbt());
-  setInterval(() => {
-    setUbt(currentUbt());
-  }, 1000);
-
   return (
     <header className="z-50 mx-auto w-screen md:container">
       <div className="mx-auto flex w-full flex-row justify-between bg-white p-4 dark:bg-black md:bg-inherit">
         <Link href="/">
           <a className="my-auto text-3xl duration-200 ease-in hover:text-prime-900 dark:hover:text-prime-200">
             Svenlaa
-            <span className="mx-1 text-sm text-gray-500">@{pad(ubt, 3)}</span>
           </a>
         </Link>
 

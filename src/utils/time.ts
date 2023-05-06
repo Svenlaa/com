@@ -16,7 +16,7 @@ export const formatDate = (date: Date) =>
   date.toISOString().split("T")[0] ?? "";
 
 export const formatToTimeString = (seconds: number) =>
-  `${Math.floor(seconds / 60)}:${(seconds % 60).toString().padStart(2, "0")}`;
+  `${Math.floor(seconds / 60)}:${pad(seconds % 60, 2)}`;
 
 // Doesn't always work if the week is in the next/last year
 export const formatYearWeek = (date: Date) => {
@@ -41,17 +41,3 @@ export const getFirstDayOfYear = (year: number) => {
 
 export const getWeeksInYear = (year: number) =>
   dayjs(`${year}-01-01`).isoWeeksInYear();
-
-// Time Notation based on Swash Internet Time and French Decimal Time
-// UBT is based on UTC, instead of CET like Swash Internet Time
-export const currentUbt = () =>
-  Math.floor(((new Date().getTime() % 86400000) / 86400000) * 1000);
-
-export const convertUbtToTimestamp = (ubt: number) => {
-  let s = (ubt / 1000) * 86400;
-  const h = Math.floor(s / 3600);
-  s -= h * 3600;
-  const m = Math.floor(s / 60);
-
-  return `${pad(h, 2)}:${pad(m, 2)}`;
-};
