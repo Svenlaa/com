@@ -1,4 +1,3 @@
-// src/server/router/context.ts
 import type { inferAsyncReturnType } from "@trpc/server";
 import type { CreateNextContextOptions } from "@trpc/server/adapters/next";
 import { Session, getServerSession } from "next-auth";
@@ -28,7 +27,7 @@ export const createContext = async (opts: CreateNextContextOptions) => {
   const { req, res } = opts;
 
   // Get the session from the server using the unstable_getServerSession wrapper function
-  const session = await getServerSession(req, res, authOptions)
+  const session = await getServerSession(req, res, authOptions);
 
   return await createContextInner({
     session,
