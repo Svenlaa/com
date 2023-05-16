@@ -31,7 +31,7 @@ const ActivityItem = ({
   });
   return (
     <div
-      className={`my-4 mx-auto flex flex-col justify-between rounded-lg border-2 bg-white p-4 px-6 dark:bg-white/10 ${
+      className={`mx-auto my-4 flex flex-col justify-between rounded-lg border-2 bg-white p-4 px-6 dark:bg-white/10 ${
         item.isEvent ? "border-amber-400" : "border-gray-400"
       }`}
     >
@@ -57,6 +57,7 @@ const ActivityItem = ({
             <button
               className="ml-1 text-red-600 hover:text-red-500 dark:text-red-400"
               onClick={() => onDelete(item.id)}
+              title="Delete"
             >
               <FontAwesomeIcon icon={faTrash} />
             </button>
