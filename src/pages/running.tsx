@@ -87,7 +87,7 @@ const RunningPage = () => {
   );
 
   return (
-    <MainLayout className="mx-auto max-w-xl py-4 px-0 md:max-w-xl">
+    <MainLayout className="mx-auto max-w-xl px-0 py-4 md:max-w-xl">
       <div className="mx-2 rounded-md bg-black/20 p-1 dark:bg-white/20">
         <div className="mx-4 flex flex-row justify-between text-black/75  dark:text-white/75">
           <button
@@ -124,23 +124,23 @@ const RunningPage = () => {
       <div className="mx-auto w-80 transition-all">
         {session && (
           <Link href="/running/add">
-            <a className="my-4 mx-auto flex flex-col text-center text-lg font-bold hover:text-prime-800 dark:hover:text-prime-200">
+            <a className="mx-auto my-4 flex flex-col text-center text-lg font-bold hover:text-prime-800 dark:hover:text-prime-200">
               {t("add")}
             </a>
           </Link>
         )}
         {isLoading && (
-          <div className="my-4 mx-auto flex items-center justify-center rounded-lg border-2 border-gray-400 bg-white p-4 px-6 text-center dark:bg-white/10 ">
+          <div className="mx-auto my-4 flex items-center justify-center rounded-lg border-2 border-gray-400 bg-white p-4 px-6 text-center dark:bg-white/10 ">
             <span className="text-lg font-semibold">{t("loading")}</span>
           </div>
         )}
         {!isLoading && isError && (
-          <div className="my-4 mx-auto flex items-center justify-center rounded-lg border-2 border-red-400 bg-white p-4 px-6 text-center dark:bg-white/10 ">
+          <div className="mx-auto my-4 flex items-center justify-center rounded-lg border-2 border-red-400 bg-white p-4 px-6 text-center dark:bg-white/10 ">
             <span className="text-lg font-semibold">{t("error")}</span>
           </div>
         )}
         {!filteredRuns?.length && !isLoading && !isError && (
-          <div className="my-4 mx-auto flex items-center justify-center rounded-lg border-2 border-gray-400 bg-white p-4 px-6 text-center dark:bg-white/10 ">
+          <div className="mx-auto my-4 flex items-center justify-center rounded-lg border-2 border-gray-400 bg-white p-4 px-6 text-center dark:bg-white/10 ">
             <span className="text-lg font-semibold">
               {t("nothing_found")} ☹️
             </span>
@@ -149,7 +149,7 @@ const RunningPage = () => {
         {filteredRuns?.map((run) => (
           <ActivityItem
             item={run}
-            isAuthed={!!session?.user}
+            isAuthed={!!session?.user?.isAdmin}
             key={run.id}
             onDelete={onDelete}
           />
