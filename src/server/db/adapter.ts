@@ -7,7 +7,7 @@ import {
 import { db as dbType } from "./client";
 import { Account, Session, User } from "../../../drizzle/schema";
 import { createId } from "@paralleldrive/cuid2";
-import { and, eq } from "drizzle-orm/expressions";
+import { and, eq } from "drizzle-orm";
 
 function pretend<T>(data: unknown): T {
   return data as T;
