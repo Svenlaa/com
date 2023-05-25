@@ -88,8 +88,8 @@ const RunningPage = () => {
 
   return (
     <MainLayout className="mx-auto max-w-xl px-0 py-4 md:max-w-xl">
-      <div className="mx-2 rounded-md bg-black/20 p-1 dark:bg-white/20">
-        <div className="mx-4 flex flex-row justify-between text-black/75  dark:text-white/75">
+      <div className="mx-2 rounded-md border-2 border-black/10 bg-black/20 p-1 drop-shadow-md dark:bg-white/20">
+        <div className="mx-4 flex flex-row justify-between text-black/75 dark:text-white/75">
           <button
             onClick={() => setYear(year - 1)}
             aria-label={t("previous_year")}
@@ -116,7 +116,6 @@ const RunningPage = () => {
               key={week.block}
               yearWeek={week.block}
               grade={week.grade || 0}
-              hasEvent={week.hasEvent}
             />
           ))}
         </div>
