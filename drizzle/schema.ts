@@ -1,14 +1,14 @@
+import { InferModel } from "drizzle-orm";
 import {
   boolean,
   datetime,
   int,
   mediumint,
+  mysqlTable,
   text,
+  uniqueIndex,
   varchar,
-} from "drizzle-orm/mysql-core/columns";
-import { uniqueIndex } from "drizzle-orm/mysql-core/indexes";
-import { mysqlTable } from "drizzle-orm/mysql-core/table";
-import { InferModel } from "drizzle-orm";
+} from "drizzle-orm/mysql-core";
 
 const string = (name: string) => varchar(name, { length: 255 });
 

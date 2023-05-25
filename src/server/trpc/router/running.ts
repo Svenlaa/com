@@ -2,9 +2,8 @@ import { adminProcedure, publicProcedure, router } from "../trpc";
 import { z } from "zod";
 import { formatDate, formatYearWeek } from "../../../utils/time";
 import { Run } from "../../../../drizzle/schema";
-import { desc, eq, like } from "drizzle-orm/expressions";
+import { asc, desc, eq, like } from "drizzle-orm";
 import { createId } from "@paralleldrive/cuid2";
-import { asc } from "drizzle-orm/expressions";
 
 export const runningRouter = router({
   all: publicProcedure
