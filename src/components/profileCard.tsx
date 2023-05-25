@@ -63,7 +63,7 @@ type pathType = {
 };
 const ProfileLink = (props: pathType) => {
   return (
-    <div className="relative rounded-md bg-white/80 drop-shadow-sm justify-center h-8 w-8 text-lg text-black/80 transition-colors duration-200 hover:bg-gray-300 dark:text-gray-400 md:hover:bg-prime-700 md:hover:text-white">
+    <div className="relative rounded-md bg-white/80 dark:bg-black/80 drop-shadow-sm justify-center h-8 w-8 text-lg text-black/80 transition-colors duration-200 hover:bg-gray-300 dark:text-gray-400 md:hover:bg-prime-700 md:hover:text-white">
       <div
         className={`${
           props.animate ? "ping" : "opacity-0"
