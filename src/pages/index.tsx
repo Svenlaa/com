@@ -27,6 +27,7 @@ const profile = {
       href: "mailto:sven.lammertink@hotmail.com",
       icon: faEnvelope,
       label: "email",
+      animate: true,
     },
   ],
 };

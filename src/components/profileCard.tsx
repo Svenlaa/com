@@ -37,6 +37,7 @@ const ProfileCard = ({ buttonTxt, profile }: ProfileCardProps) => {
         <div className="my-2 flex flex-row justify-center gap-2">
           {profile.links.map((l) => (
             <ProfileLink
+              animate={l.animate}
               href={l.href}
               icon={l.icon}
               key={l.href}
@@ -58,18 +59,26 @@ type pathType = {
   readonly href: string;
   readonly icon: IconDefinition;
   readonly label: string;
+  readonly animate?: boolean;
 };
 const ProfileLink = (props: pathType) => {
   return (
-    <Link href={props.href}>
-      <a
-        target="_blank"
-        aria-label={props.label}
-        className="rounded-md bg-black/10 p-1 px-2 text-lg text-black/80 transition-colors duration-200 hover:bg-gray-300 dark:text-gray-400 md:hover:bg-prime-700 md:hover:text-white"
-      >
-        <FontAwesomeIcon icon={props.icon} className="aspect-square" />
-      </a>
-    </Link>
+    <div className="relative rounded-md bg-white/80 drop-shadow-sm justify-center h-8 w-8 text-lg text-black/80 transition-colors duration-200 hover:bg-gray-300 dark:text-gray-400 md:hover:bg-prime-700 md:hover:text-white">
+      <div
+        className={`${
+          props.animate ? "animate-ping" : "opacity-0"
+        } bg-prime-700 absolute h-full w-full top-0 -z-10 rounded-lg`}
+      />
+      <Link href={props.href}>
+        <a
+          target="_blank"
+          aria-label={props.label}
+          className="h-full w-full flex justify-center content-center flex-col "
+        >
+          <FontAwesomeIcon icon={props.icon} className="aspect-square" />
+        </a>
+      </Link>
+    </div>
   );
 };
 
