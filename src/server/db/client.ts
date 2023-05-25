@@ -10,6 +10,7 @@ declare global {
 const connection = mysql.createPool(env.DATABASE_URL);
 
 export const db = global.db || drizzle(connection);
+export type dbType = typeof db;
 
 if (env.NODE_ENV !== "production") {
   global.db = db;

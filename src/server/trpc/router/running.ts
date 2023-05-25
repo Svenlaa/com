@@ -1,7 +1,7 @@
 import { adminProcedure, publicProcedure, router } from "../trpc";
 import { z } from "zod";
 import { formatDate, formatYearWeek } from "../../../utils/time";
-import { Run } from "../../../../drizzle/schema";
+import { Runs } from "../../../../drizzle/schema";
 import { asc, desc, eq, like } from "drizzle-orm";
 import { createId } from "@paralleldrive/cuid2";
 
@@ -10,24 +10,24 @@ export const runningRouter = router({
     .input(z.number().default(new Date().getFullYear()))
     .query(async ({ input, ctx }) => {
       const firstRun = await ctx.db
-        .select({ yearWeek: Run.yearWeek })
-        .from(Run)
+        .select({ yearWeek: Runs.yearWeek })
+        .from(Runs)
         .limit(1)
-        .orderBy(asc(Run.date))
+        .orderBy(asc(Runs.date))
         .then((e) => e[0]);
       const firstYearString = firstRun?.yearWeek.split("w")[0] ?? null;
       const firstYear = firstYearString === null ? 0 : +firstYearString;
 
       const runs = await ctx.db
         .select()
-        .from(Run)
-        .where(like(Run.yearWeek, `${input}w%`))
-        .orderBy(desc(Run.date));
+        .from(Runs)
+        .where(like(Runs.yearWeek, `${input}w%`))
+        .orderBy(desc(Runs.date));
 
       return { runs, firstYear };
     }),
   get: publicProcedure.input(z.string()).query(async ({ input, ctx }) => {
-    return (await ctx.db.select().from(Run).where(eq(Run.id, input)))[0];
+    return (await ctx.db.select().from(Runs).where(eq(Runs.id, input)))[0];
   }),
   create: adminProcedure
     .input(
@@ -39,11 +39,11 @@ export const runningRouter = router({
       })
     )
     .mutation(async ({ input, ctx }) => {
-      const date = input.date;
+      const date = new Date(input.date);
       const yearWeek = formatYearWeek(new Date(date));
       if (!ctx.session.user.isAdmin)
         throw Error("You are not authorized to create runs");
-      return await ctx.db.insert(Run).values({
+      return await ctx.db.insert(Runs).values({
         id: createId(),
         date,
         distance: input.distance,
@@ -63,15 +63,15 @@ export const runningRouter = router({
       if (!ctx.session.user.isAdmin)
         throw Error("You are not authorized to create runs");
       return await ctx.db
-        .update(Run)
+        .update(Runs)
         .set({ time: input.time })
-        .where(eq(Run.id, input.id));
+        .where(eq(Runs.id, input.id));
     }),
   delete: adminProcedure.input(z.string()).mutation(async ({ input, ctx }) => {
     const run = input;
     if (!ctx.session.user.isAdmin)
       throw Error("You are not authorized to delete runs");
 
-    return await ctx.db.delete(Run).where(eq(Run.id, run));
+    return await ctx.db.delete(Runs).where(eq(Runs.id, run));
   }),
 });

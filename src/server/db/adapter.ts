@@ -1,103 +1,170 @@
+import { Adapter } from "next-auth/adapters";
+import type { dbType } from "./client";
 import {
-  Adapter,
-  AdapterAccount,
-  AdapterSession,
-  AdapterUser,
-} from "next-auth/adapters";
-import { db as dbType } from "./client";
-import { Account, Session, User } from "../../../drizzle/schema";
+  TSession,
+  TUser,
+  Accounts,
+  Sessions,
+  Users,
+  VerificationTokens,
+} from "../../../drizzle/schema";
 import { createId } from "@paralleldrive/cuid2";
 import { and, eq } from "drizzle-orm";
 
-function pretend<T>(data: unknown): T {
-  return data as T;
-}
-
-export const DrizzleAdapter = (db: typeof dbType): Adapter => {
+export const DrizzleAdapter = (db: dbType): Adapter => {
   return {
-    createUser: async (data) => {
+    createUser: async (user) => {
       const id = createId();
-      await db
-        .insert(User)
-        .values({ ...data, id: createId() })
-        .execute();
-      const res = await db.select().from(User).where(eq(User.id, id));
-      return pretend<AdapterUser>(res ?? null);
+      await db.insert(Users).values({ ...user, id });
+
+      return (await db
+        .select({
+          id: Users.id,
+          email: Users.email,
+          emailVerified: Users.emailVerified,
+          name: Users.name,
+        })
+        .from(Users)
+        .where(eq(Users.id, id))
+        .then((res) => res[0])) as TUser;
     },
     getUser: async (id) => {
-      const res = await db
-        .select({
-          id: User.id,
-          isAdmin: User.isAdmin,
-          email: User.email,
-          emailVerified: User.emailVerified,
-        })
-        .from(User)
-        .where(eq(User.id, id))
-        .then((res) => res[0]);
-      return pretend<AdapterUser>(res ?? null);
-    },
-    getSessionAndUser: async (sessionToken) => {
-      const res = await db
-        .select({ session: Session, user: User })
-        .from(Session)
-        .where(eq(Session.sessionToken, sessionToken))
-        .innerJoin(User, eq(User.id, Session.userId))
-        .then((res) => res[0]);
-      return pretend<{ session: AdapterSession; user: AdapterUser }>(
-        res ?? null
-      );
-    },
-    getUserByAccount: async (account) => {
-      const res = await db
-        .select({
-          id: User.id,
-          email: User.email,
-          emailVerified: User.emailVerified,
-          image: User.image,
-          name: User.name,
-        })
-        .from(User)
-        .innerJoin(
-          Account,
-          and(
-            eq(Account.providerAccountId, account.providerAccountId),
-            eq(Account.provider, account.provider)
-          )
-        )
-        .then((res) => res[0]);
-      return pretend<AdapterUser>(res ?? null);
-    },
-    createSession: async (session) => {
-      const id = createId();
-      await db
-        .insert(Session)
-        .values({ ...session, id })
-        .execute();
-      const res = await db
+      return db
         .select()
-        .from(Session)
-        .where(eq(Session.id, id))
-        .then((res) => res[0]);
-      return pretend<AdapterSession>(res ?? null);
+        .from(Users)
+        .where(eq(Users.id, id))
+        .then((res) => res[0] || null);
     },
     getUserByEmail: async (email) => {
-      const res = await db
+      return db
         .select()
-        .from(User)
-        .where(eq(User.email, email))
+        .from(Users)
+        .where(eq(Users.email, email))
+        .then((res) => res[0] || null);
+    },
+    getUserByAccount: async (account) => {
+      const user =
+        (await db
+          .select()
+          .from(Users)
+          .innerJoin(
+            Accounts,
+            and(
+              eq(Accounts.providerAccountId, account.providerAccountId),
+              eq(Accounts.provider, account.provider)
+            )
+          )
+          .then((res) => res[0])) ?? null;
+
+      return user?.users ?? null;
+    },
+    updateUser: async (user) => {
+      if (!user.id) {
+        throw new Error("No user id.");
+      }
+
+      await db.update(Users).set(user).where(eq(Users.id, user.id));
+
+      return (await db
+        .select()
+        .from(Users)
+        .where(eq(Users.id, user.id))
+        .then((res) => res[0])) as TUser;
+    },
+    deleteUser: async (id) => {
+      await db
+        .delete(Users)
+        .where(eq(Users.id, id))
         .then((res) => res[0]);
-      return pretend<AdapterUser>(res ?? null);
+    },
+    linkAccount: async (account) => {
+      await db
+        .insert(Accounts)
+        .values(account)
+        .then((res) => res[0]);
+    },
+    unlinkAccount: async (account) => {
+      await db
+        .delete(Accounts)
+        .where(
+          and(
+            eq(Accounts.providerAccountId, account.providerAccountId),
+            eq(Accounts.provider, account.provider)
+          )
+        );
+
+      return undefined;
+    },
+    createSession: async (data) => {
+      await db.insert(Sessions).values(data);
+
+      return (await db
+        .select()
+        .from(Sessions)
+        .where(eq(Sessions.sessionToken, data.sessionToken))
+        .then((res) => res[0])) as TSession;
+    },
+    getSessionAndUser: async (sessionToken) => {
+      return db
+        .select({
+          session: Sessions,
+          user: Users,
+        })
+        .from(Sessions)
+        .where(eq(Sessions.sessionToken, sessionToken))
+        .innerJoin(Users, eq(Users.id, Sessions.userId))
+        .then((res) => res[0] || null);
+    },
+    updateSession: async (data) => {
+      await db
+        .update(Sessions)
+        .set(data)
+        .where(eq(Sessions.sessionToken, data.sessionToken));
+
+      return db
+        .select()
+        .from(Sessions)
+        .where(eq(Sessions.sessionToken, data.sessionToken))
+        .then((res) => res[0]);
     },
     deleteSession: async (sessionToken) => {
-      await db
-        .delete(Session)
-        .where(eq(Session.sessionToken, sessionToken))
-        .execute();
-      return;
+      await db.delete(Sessions).where(eq(Sessions.sessionToken, sessionToken));
     },
-    updateUser: () => pretend<AdapterUser>(null),
-    updateSession: () => pretend<AdapterSession>(null),
-    linkAccount: () => pretend<AdapterAccount>(null),
+    createVerificationToken: async (token) => {
+      await db.insert(VerificationTokens).values(token);
+
+      return db
+        .select()
+        .from(VerificationTokens)
+        .where(eq(VerificationTokens.identifier, token.identifier))
+        .then((res) => res[0]);
+    },
+    useVerificationToken: async (token) => {
+      try {
+        const deletedToken = await db
+          .select()
+          .from(VerificationTokens)
+          .where(
+            and(
+              eq(VerificationTokens.identifier, token.identifier),
+              eq(VerificationTokens.token, token.token)
+            )
+          )
+          .then((res) => res[0] || null);
+
+        await db
+          .delete(VerificationTokens)
+          .where(
+            and(
+              eq(VerificationTokens.identifier, token.identifier),
+              eq(VerificationTokens.token, token.token)
+            )
+          );
+
+        return deletedToken;
+      } catch (err) {
+        throw new Error("No verification token found.");
+      }
+    },
   };
 };

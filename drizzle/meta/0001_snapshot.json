@@ -1,19 +1,12 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "871703e7-e7c9-4e06-b9b2-d407e4fa67e5",
-  "prevId": "a106a0f0-1a18-482e-a961-cd9ed762ad30",
+  "id": "249672ef-ef4d-48de-9864-18fce6eb54cd",
+  "prevId": "dc22d04a-f4f9-4fff-8593-f6d34fcc23dc",
   "tables": {
-    "Account": {
-      "name": "Account",
+    "accounts": {
+      "name": "accounts",
       "columns": {
-        "id": {
-          "name": "id",
-          "type": "varchar(255)",
-          "primaryKey": true,
-          "notNull": true,
-          "autoincrement": false
-        },
         "userId": {
           "name": "userId",
           "type": "varchar(255)",
@@ -25,7 +18,7 @@
           "name": "type",
           "type": "varchar(255)",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "autoincrement": false
         },
         "provider": {
@@ -92,35 +85,33 @@
           "autoincrement": false
         }
       },
-      "indexes": {
-        " Account_provider_providerAccountId_key": {
-          "name": " Account_provider_providerAccountId_key",
-          "columns": [
-            "provider",
-            "providerAccountId"
-          ],
-          "isUnique": true
-        }
-      },
+      "indexes": {},
       "foreignKeys": {
-        "Account_userId_User_id_fk": {
-          "name": "Account_userId_User_id_fk",
-          "tableFrom": "Account",
-          "tableTo": "User",
+        "accounts_userId_users_id_fk": {
+          "name": "accounts_userId_users_id_fk",
+          "tableFrom": "accounts",
+          "tableTo": "users",
           "columnsFrom": [
             "userId"
           ],
           "columnsTo": [
             "id"
           ],
-          "onDelete": "cascade",
-          "onUpdate": "cascade"
+          "onDelete": "cascade"
         }
       },
-      "compositePrimaryKeys": {}
+      "compositePrimaryKeys": {
+        "accounts_provider_providerAccountId": {
+          "name": "accounts_provider_providerAccountId",
+          "columns": [
+            "provider",
+            "providerAccountId"
+          ]
+        }
+      }
     },
-    "Run": {
-      "name": "Run",
+    "runs": {
+      "name": "runs",
       "columns": {
         "id": {
           "name": "id",
@@ -145,7 +136,7 @@
         },
         "date": {
           "name": "date",
-          "type": "varchar(10)",
+          "type": "date",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
@@ -177,20 +168,13 @@
       "foreignKeys": {},
       "compositePrimaryKeys": {}
     },
-    "Session": {
-      "name": "Session",
+    "sessions": {
+      "name": "sessions",
       "columns": {
-        "id": {
-          "name": "id",
-          "type": "varchar(255)",
-          "primaryKey": true,
-          "notNull": true,
-          "autoincrement": false
-        },
         "sessionToken": {
           "name": "sessionToken",
           "type": "varchar(255)",
-          "primaryKey": false,
+          "primaryKey": true,
           "notNull": true,
           "autoincrement": false
         },
@@ -203,40 +187,31 @@
         },
         "expires": {
           "name": "expires",
-          "type": "datetime(3)",
+          "type": "timestamp",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
         }
       },
-      "indexes": {
-        "Session_sessionToken_key": {
-          "name": "Session_sessionToken_key",
-          "columns": [
-            "sessionToken"
-          ],
-          "isUnique": true
-        }
-      },
+      "indexes": {},
       "foreignKeys": {
-        "Session_userId_User_id_fk": {
-          "name": "Session_userId_User_id_fk",
-          "tableFrom": "Session",
-          "tableTo": "User",
+        "sessions_userId_users_id_fk": {
+          "name": "sessions_userId_users_id_fk",
+          "tableFrom": "sessions",
+          "tableTo": "users",
           "columnsFrom": [
             "userId"
           ],
           "columnsTo": [
             "id"
           ],
-          "onDelete": "cascade",
-          "onUpdate": "cascade"
+          "onDelete": "cascade"
         }
       },
       "compositePrimaryKeys": {}
     },
-    "User": {
-      "name": "User",
+    "users": {
+      "name": "users",
       "columns": {
         "id": {
           "name": "id",
@@ -256,12 +231,12 @@
           "name": "email",
           "type": "varchar(255)",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "autoincrement": false
         },
         "emailVerified": {
           "name": "emailVerified",
-          "type": "datetime(3)",
+          "type": "timestamp",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
@@ -282,20 +257,12 @@
           "default": false
         }
       },
-      "indexes": {
-        "User_email_key": {
-          "name": "User_email_key",
-          "columns": [
-            "email"
-          ],
-          "isUnique": true
-        }
-      },
+      "indexes": {},
       "foreignKeys": {},
       "compositePrimaryKeys": {}
     },
-    "VerificationToken": {
-      "name": "VerificationToken",
+    "verificationTokens": {
+      "name": "verificationTokens",
       "columns": {
         "identifier": {
           "name": "identifier",
@@ -313,31 +280,23 @@
         },
         "expires": {
           "name": "expires",
-          "type": "datetime(3)",
+          "type": "timestamp",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
         }
       },
-      "indexes": {
-        "VerificationToken_identifier_token_key": {
-          "name": "VerificationToken_identifier_token_key",
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "verificationTokens_identifier_token": {
+          "name": "verificationTokens_identifier_token",
           "columns": [
             "identifier",
             "token"
-          ],
-          "isUnique": true
-        },
-        "VerificationToken_token_key": {
-          "name": "VerificationToken_token_key",
-          "columns": [
-            "token"
-          ],
-          "isUnique": true
+          ]
         }
-      },
-      "foreignKeys": {},
-      "compositePrimaryKeys": {}
+      }
     }
   },
   "schemas": {},

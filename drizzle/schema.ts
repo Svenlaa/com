@@ -1,102 +1,89 @@
 import { InferModel } from "drizzle-orm";
 import {
   boolean,
-  datetime,
   int,
   mediumint,
   mysqlTable,
   text,
-  uniqueIndex,
+  primaryKey,
+  timestamp,
   varchar,
+  date,
 } from "drizzle-orm/mysql-core";
+import { ProviderType } from "next-auth/providers";
 
 const string = (name: string) => varchar(name, { length: 255 });
 
-export type TAccount = InferModel<typeof Account>;
-export type TSession = InferModel<typeof Session>;
-export type TUser = InferModel<typeof User>;
-export type TVerificationToken = InferModel<typeof VerificationToken>;
-export type TRun = InferModel<typeof Run>;
+export type TAccount = InferModel<typeof Accounts>;
+export type TSession = InferModel<typeof Sessions>;
+export type TUser = InferModel<typeof Users>;
+export type TVerificationToken = InferModel<typeof VerificationTokens>;
+export type TRun = InferModel<typeof Runs>;
 
-export const Account = mysqlTable(
-  "Account",
+export type Schema = {
+  users: typeof Users;
+  accounts: typeof Accounts;
+  sessions: typeof Sessions;
+  verificationTokens: typeof VerificationTokens;
+  runs: typeof Runs;
+};
+
+export const Users = mysqlTable("users", {
+  id: string("id").notNull().primaryKey(),
+  name: string("name"),
+  email: string("email").notNull(),
+  emailVerified: timestamp("emailVerified", { mode: "date" }),
+  image: string("image"),
+  isAdmin: boolean("isAdmin").default(false).notNull(),
+});
+
+export const Accounts = mysqlTable(
+  "accounts",
   {
-    id: string("id").notNull().primaryKey(),
     userId: string("userId")
       .notNull()
-      .references(() => User.id, { onDelete: "cascade", onUpdate: "cascade" }),
-    type: string("type"),
+      .references(() => Users.id, { onDelete: "cascade" }),
+    type: string("type").$type<ProviderType>().notNull(),
     provider: string("provider").notNull(),
     providerAccountId: string("providerAccountId").notNull(),
-    refreshToken: text("refresh_token"),
-    accessToken: text("access_token"),
-    expiresAt: int("expires_at"),
-    tokenType: string("token_type"),
+    refresh_token: text("refresh_token"),
+    access_token: text("access_token"),
+    expires_at: int("expires_at"),
+    token_type: string("token_type"),
     scope: string("scope"),
-    idToken: text("id_token"),
-    sessionState: string("session_state"),
+    id_token: text("id_token"),
+    session_state: string("session_state"),
   },
-  (table) => ({
-    Account_provider_providerAccountId_key: uniqueIndex(
-      " Account_provider_providerAccountId_key"
-    ).on(table.provider, table.providerAccountId),
+  (account) => ({
+    compoundKey: primaryKey(account.provider, account.providerAccountId),
   })
 );
 
-export const Session = mysqlTable(
-  "Session",
-  {
-    id: string("id").notNull().primaryKey(),
-    sessionToken: string("sessionToken").notNull(),
-    userId: string("userId")
-      .notNull()
-      .references(() => User.id, { onDelete: "cascade", onUpdate: "cascade" }),
-    expires: datetime("expires", { fsp: 3 }).notNull(),
-  },
-  (table) => ({
-    Session_sessionToken_key: uniqueIndex("Session_sessionToken_key").on(
-      table.sessionToken
-    ),
-  })
-);
+export const Sessions = mysqlTable("sessions", {
+  sessionToken: string("sessionToken").notNull().primaryKey(),
+  userId: string("userId")
+    .notNull()
+    .references(() => Users.id, { onDelete: "cascade" }),
+  expires: timestamp("expires", { mode: "date" }).notNull(),
+});
 
-export const User = mysqlTable(
-  "User",
+export const VerificationTokens = mysqlTable(
+  "verificationTokens",
   {
-    id: string("id").notNull().primaryKey(),
-    name: string("name"),
-    email: string("email"),
-    emailVerified: datetime("emailVerified", { fsp: 3 }),
-    image: string("image"),
-    isAdmin: boolean("isAdmin").default(false).notNull(),
-  },
-  (table) => ({
-    User_email_key: uniqueIndex("User_email_key").on(table.email),
-  })
-);
-
-export const VerificationToken = mysqlTable(
-  "VerificationToken",
-  {
-    id: string("identifier").notNull(),
+    identifier: string("identifier").notNull(),
     token: string("token").notNull(),
-    expires: datetime("expires", { fsp: 3 }).notNull(),
+    expires: timestamp("expires", { mode: "date" }).notNull(),
   },
-  (table) => ({
-    VerificationToken_identifier_token_key: uniqueIndex(
-      "VerificationToken_identifier_token_key"
-    ).on(table.id, table.token),
-    VerificationToken_token_key: uniqueIndex("VerificationToken_token_key").on(
-      table.token
-    ),
+  (vt) => ({
+    compoundKey: primaryKey(vt.identifier, vt.token),
   })
 );
 
-export const Run = mysqlTable("Run", {
+export const Runs = mysqlTable("runs", {
   id: string("id").primaryKey(),
   distance: mediumint("distance").notNull(),
   time: mediumint("time"),
-  date: varchar("date", { length: 10 }).notNull(),
+  date: date("date").notNull(),
   yearWeek: varchar("yearWeek", { length: 7 }).notNull(),
   isEvent: boolean("isEvent").default(false).notNull(),
   location: string("location"),
