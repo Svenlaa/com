@@ -51,10 +51,14 @@ span.gradeActivity[data-aria-grade="4"] {
   }
 }
 
-@keyframes ping {
-  75%,
+@keyframes customPing {
+  15%,
   100% {
     transform: scale(1.5);
     opacity: 0;
   }
+}
+
+.ping {
+  animation: customPing 5s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
