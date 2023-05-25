@@ -4,13 +4,9 @@ import { useSession } from "next-auth/react";
 import { FormEvent, useState } from "react";
 import MainLayout from "../../../layouts/common";
 import Input from "../../../components/form/input";
-import { GetStaticPaths, GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 import pick from "lodash/pick";
 import { useTranslations } from "next-intl";
-import { Run } from "../../../../drizzle/schema";
-import { drizzle } from "drizzle-orm/mysql2";
-import mysql from "mysql2/promise";
-import { env } from "../../../env/server.mjs";
 
 const AddTimePage = () => {
   const router = useRouter();
@@ -68,7 +64,7 @@ const AddTimePage = () => {
 AddTimePage.messages = ["RunningAdd", ...MainLayout.messages];
 export default AddTimePage;
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => ({
+export const getServerSideProps: GetServerSideProps = async ({ locale }) => ({
   props: {
     messages: pick(
       await import(`/messages/${locale}.json`),
@@ -76,13 +72,3 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => ({
     ),
   },
 });
-
-export const getStaticPaths: GetStaticPaths = async () => {
-  const db = drizzle(await mysql.createConnection(env.DATABASE_URL));
-  const res = await db.select({ id: Run.id }).from(Run).execute();
-  const paths = res.map((item) => ({ params: { id: item.id } }));
-  return {
-    paths,
-    fallback: true,
-  };
-};

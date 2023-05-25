@@ -164,7 +164,7 @@ const RunningPage = () => {
 RunningPage.messages = ["Running", ...MainLayout.messages];
 export default RunningPage;
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => ({
+export const getServerSideProps: GetStaticProps = async ({ locale }) => ({
   props: {
     messages: pick(
       await import(`../../messages/${locale}.json`),
