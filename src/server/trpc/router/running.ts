@@ -32,7 +32,10 @@ export const runningRouter = router({
   create: adminProcedure
     .input(
       z.object({
-        date: z.string().length(10).default(formatDate(new Date())),
+        date: z
+          .string()
+          .regex(new RegExp(/\d{4}-[01]\d-[0-3]\d/))
+          .default(formatDate(new Date())),
         distance: z.number(),
         time: z.number().nullable(),
         location: z.string().nullable(),
@@ -40,7 +43,7 @@ export const runningRouter = router({
     )
     .mutation(async ({ input, ctx }) => {
       const date = new Date(input.date);
-      const yearWeek = formatYearWeek(new Date(date));
+      const yearWeek = formatYearWeek(date);
       if (!ctx.session.user.isAdmin)
         throw Error("You are not authorized to create runs");
       return await ctx.db.insert(Runs).values({
