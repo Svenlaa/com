@@ -2,7 +2,7 @@ import NextAuth, { type NextAuthOptions } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 
 import { env } from "../../../env/server.mjs";
-import drizzleAdapter from "../../../server/db/drizzleAdapter.js";
+import drizzleAdapter from "../../../server/db/drizzleAdapter";
 import { db } from "../../../server/db/client";
 
 export const authOptions: NextAuthOptions = {
