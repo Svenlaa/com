@@ -1,9 +1,8 @@
 import NextAuth, { type NextAuthOptions } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 
-// Prisma adapter for NextAuth, optional and can be removed
 import { env } from "../../../env/server.mjs";
-import { DrizzleAdapter } from "../../../server/db/adapter";
+import drizzleAdapter from "../../../server/db/drizzleAdapter.js";
 import { db } from "../../../server/db/client";
 
 export const authOptions: NextAuthOptions = {
@@ -18,7 +17,7 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
   },
-  adapter: DrizzleAdapter(db),
+  adapter: drizzleAdapter(db),
   providers: [
     GithubProvider({
       clientId: env.GITHUB_CLIENT_ID,
