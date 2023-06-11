@@ -1,7 +1,7 @@
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { pick } from "lodash";
-import { GetServerSideProps } from "next";
+import { GetStaticProps } from "next";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
@@ -164,7 +164,7 @@ const RunningPage = () => {
 RunningPage.messages = ["Running", ...MainLayout.messages];
 export default RunningPage;
 
-export const getServerSideProps: GetServerSideProps = async ({ locale }) => ({
+export const getStaticProps: GetStaticProps = async ({ locale }) => ({
   props: {
     messages: pick(
       await import(`../../messages/${locale}.json`),
