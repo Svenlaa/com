@@ -25,10 +25,31 @@ const sumDistance = (currentSum: number, run: TRun) =>
 
 const RunningPage = () => {
   // Remove filter on year change
-  const [year, setYearState] = useState(new Date().getFullYear());
-  const [filter, setFilter] = useState<null | string>(null);
+  const router = useRouter();
+  const isWindow = typeof window == "object";
+  const qFilter = isWindow
+    ? new URLSearchParams(window.location.search).get("filter")
+    : null;
+  const yearString = qFilter?.split("w")[0] || null;
+  const [year, setYearState] = useState(
+    yearString ? +yearString : new Date().getFullYear()
+  );
+  const [filter, setFilter] = useState<null | string>(
+    isWindow ? new URLSearchParams(window.location.search).get("filter") : null
+  );
+  const updateFilter = (next: string | null) => {
+    setFilter(next);
+    router.replace(
+      {
+        query: next ? { filter: next } : null,
+      },
+      undefined,
+      { shallow: true }
+    );
+  };
   const setYear = (targetYear: number) => {
-    router.push(router.basePath, undefined, { shallow: true });
+    router.push({ query: {} }, undefined, { shallow: true });
+    updateFilter(null);
     setYearState(targetYear);
   };
 
@@ -48,8 +69,6 @@ const RunningPage = () => {
   };
   const { data: session } = useSession();
   const t = useTranslations("Running");
-
-  const router = useRouter();
 
   const runs = runData?.runs ?? [];
   const firstYear = runData?.firstYear ?? year;
@@ -116,7 +135,7 @@ const RunningPage = () => {
               key={week.block}
               yearWeek={week.block}
               grade={week.grade || 0}
-              setFilter={setFilter}
+              updateFilter={updateFilter}
             />
           ))}
         </div>
@@ -155,7 +174,7 @@ const RunningPage = () => {
           />
         ))}
       </div>
-      <a onClick={() => setFilter(null)}>
+      <a onClick={() => updateFilter(null)}>
         <div className="fixed left-0 top-0 -z-10 h-screen w-screen" />
       </a>
     </MainLayout>
