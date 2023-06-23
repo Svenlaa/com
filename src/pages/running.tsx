@@ -26,6 +26,7 @@ const sumDistance = (currentSum: number, run: TRun) =>
 const RunningPage = () => {
   // Remove filter on year change
   const [year, setYearState] = useState(new Date().getFullYear());
+  const [filter, setFilter] = useState<null | string>(null);
   const setYear = (targetYear: number) => {
     router.push(router.basePath, undefined, { shallow: true });
     setYearState(targetYear);
@@ -49,7 +50,6 @@ const RunningPage = () => {
   const t = useTranslations("Running");
 
   const router = useRouter();
-  const filter = router.query.filter ?? null;
 
   const runs = runData?.runs ?? [];
   const firstYear = runData?.firstYear ?? year;
@@ -116,6 +116,7 @@ const RunningPage = () => {
               key={week.block}
               yearWeek={week.block}
               grade={week.grade || 0}
+              setFilter={setFilter}
             />
           ))}
         </div>
@@ -154,9 +155,9 @@ const RunningPage = () => {
           />
         ))}
       </div>
-      <Link href={router.pathname}>
+      <a onClick={() => setFilter(null)}>
         <div className="fixed left-0 top-0 -z-10 h-screen w-screen" />
-      </Link>
+      </a>
     </MainLayout>
   );
 };
