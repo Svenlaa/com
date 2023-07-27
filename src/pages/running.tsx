@@ -142,10 +142,11 @@ const RunningPage = () => {
       </div>
       <div className="mx-auto w-80 transition-all">
         {session && (
-          <Link href="/running/add">
-            <a className="mx-auto my-4 flex flex-col text-center text-lg font-bold hover:text-prime-800 dark:hover:text-prime-200">
-              {t("add")}
-            </a>
+          <Link
+            href="/running/add"
+            className="mx-auto my-4 flex flex-col text-center text-lg font-bold hover:text-prime-800 dark:hover:text-prime-200"
+          >
+            {t("add")}
           </Link>
         )}
         {isLoading && (

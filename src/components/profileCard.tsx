@@ -1,6 +1,6 @@
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link";
 
 export type Profile = {
@@ -46,10 +46,11 @@ const ProfileCard = ({ buttonTxt, profile }: ProfileCardProps) => {
           ))}
         </div>
       )}
-      <Link href="/running">
-        <a className="mx-auto my-2 w-min whitespace-nowrap rounded-full bg-prime-600 py-2 px-4 text-2xl font-extrabold text-white transition-colors duration-200 hover:bg-prime-700">
-          {buttonTxt}
-        </a>
+      <Link
+        href="/running"
+        className="mx-auto my-2 w-min whitespace-nowrap rounded-full bg-prime-600 py-2 px-4 text-2xl font-extrabold text-white transition-colors duration-200 hover:bg-prime-700"
+      >
+        {buttonTxt}
       </Link>
     </div>
   );
@@ -69,14 +70,13 @@ const ProfileLink = (props: pathType) => {
           props.animate ? "ping" : "opacity-0"
         } bg-prime-700 absolute h-full w-full top-0 -z-10 rounded-lg`}
       />
-      <Link href={props.href}>
-        <a
-          target="_blank"
-          aria-label={props.label}
-          className="h-full w-full flex justify-center content-center flex-col "
-        >
-          <FontAwesomeIcon icon={props.icon} className="aspect-square" />
-        </a>
+      <Link
+        href={props.href}
+        target="_blank"
+        aria-label={props.label}
+        className="h-full w-full flex justify-center content-center flex-col "
+      >
+        <FontAwesomeIcon icon={props.icon} className="aspect-square" />
       </Link>
     </div>
   );

@@ -33,10 +33,11 @@ const Header = () => {
   return (
     <header className="z-50 mx-auto w-screen md:container">
       <div className="mx-auto flex w-full flex-row justify-between bg-white p-4 dark:bg-black md:bg-inherit">
-        <Link href="/">
-          <a className="my-auto text-3xl duration-200 ease-in hover:text-prime-900 dark:hover:text-prime-200">
-            Svenlaa
-          </a>
+        <Link
+          href="/"
+          className="my-auto text-3xl duration-200 ease-in hover:text-prime-900 dark:hover:text-prime-200"
+        >
+          Svenlaa
         </Link>
 
         {/* Section with hamburger for smaller screens */}
@@ -123,19 +124,18 @@ type LinkProps = {
 const HeaderLink = (props: LinkProps) => {
   const { to, children } = props;
   return (
-    <Link href={to}>
-      <a
-        className={`${
-          props.isActive
-            ? "text-prime-700 md:bg-prime-700 md:text-white md:hover:bg-prime-600"
-            : "hover:text-prime-700 md:bg-white md:text-gray-800 md:hover:bg-prime-700 md:hover:text-white md:dark:bg-gray-800 md:dark:text-gray-400"
-        } transition-text whitespace-nowrap rounded-md p-2 px-3 text-xl drop-shadow-sm delay-75 duration-500 ease-out`}
-      >
-        {props.icon ? (
-          <FontAwesomeIcon className="text-md pr-2" icon={props.icon} />
-        ) : null}
-        {children}
-      </a>
+    <Link
+      href={to}
+      className={`${
+        props.isActive
+          ? "text-prime-700 md:bg-prime-700 md:text-white md:hover:bg-prime-600"
+          : "hover:text-prime-700 md:bg-white md:text-gray-800 md:hover:bg-prime-700 md:hover:text-white md:dark:bg-gray-800 md:dark:text-gray-400"
+      } transition-text whitespace-nowrap rounded-md p-2 px-3 text-xl drop-shadow-sm delay-75 duration-500 ease-out`}
+    >
+      {props.icon ? (
+        <FontAwesomeIcon className="text-md pr-2" icon={props.icon} />
+      ) : null}
+      {children}
     </Link>
   );
 };

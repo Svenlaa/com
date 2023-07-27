@@ -48,10 +48,11 @@ const ActivityItem = ({
         {isAuthed && (
           <div className="flex flex-row gap-2">
             {!item.time && (
-              <Link href={`/running/${item.id}/addTime`}>
-                <a className="ml-1 text-amber-600 hover:text-amber-500 dark:text-amber-400">
-                  <FontAwesomeIcon icon={faCalendarPlus} />
-                </a>
+              <Link
+                href={`/running/${item.id}/addTime`}
+                className="ml-1 text-amber-600 hover:text-amber-500 dark:text-amber-400"
+              >
+                <FontAwesomeIcon icon={faCalendarPlus} />
               </Link>
             )}
             <button
