@@ -8,7 +8,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        prime: colors.emerald,
+        prime: colors.teal,
         neutral: colors.slate,
       },
     },
