@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "dev": "next dev --port 2000",
+    "dev": "next dev",
     "lint": "next lint",
-    "start": "next start --port 2000",
+    "start": "next start",
     "drizzle:generate": "drizzle-kit generate:mysql --schema=./drizzle/schema.ts",
     "drizzle:up": "drizzle-kit up:mysql"
   },
