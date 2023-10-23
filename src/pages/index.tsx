@@ -24,7 +24,7 @@ const profile = {
       label: "LinkedIn",
     },
     {
-      href: "mailto:mail@svenlaa.com",
+      href: "mailto:hey@svenlaa.com",
       icon: faEnvelope,
       label: "email",
       animate: true,
