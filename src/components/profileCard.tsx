@@ -23,7 +23,7 @@ const ProfileCard = ({ buttonTxt, profile }: ProfileCardProps) => {
           src={profile.pictureUrl}
           alt={profile.name}
           layout="fill"
-          className="aspect-square rounded-full"
+          className="aspect-square rounded-full shadow-inner"
           priority
         />
       </span>

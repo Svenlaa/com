@@ -16,8 +16,9 @@ const MainLayout = (props: Props) => {
     <div className="relative flex min-h-screen w-full flex-col">
       {header || <Header />}
       <main
+        style={{ scrollbarGutter: "stable both-edges" }}
         {...props}
-        className={`z-10 mx-auto h-full w-full flex-grow px-4 md:container ${className}`}
+        className={`gutter z-10 mx-auto h-full w-full flex-grow px-4 md:container ${className}`}
       >
         {children}
       </main>

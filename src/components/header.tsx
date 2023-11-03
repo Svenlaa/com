@@ -32,7 +32,7 @@ const Header = () => {
 
   return (
     <header className="z-50 mx-auto w-screen md:container">
-      <div className="mx-auto flex w-full flex-row justify-between bg-white p-4 dark:bg-black md:bg-inherit">
+      <div className="mx-auto flex w-full flex-row justify-between bg-white p-4 drop-shadow-md dark:bg-black md:bg-inherit">
         <Link
           href="/"
           className="my-auto text-3xl duration-200 ease-in hover:text-prime-900 dark:hover:text-prime-200"
@@ -95,7 +95,7 @@ const Header = () => {
       <div
         className={`${
           isOpen ? "flex " : "hidden"
-        } absolute w-full flex-col rounded-b-xl bg-white px-4 drop-shadow-xl dark:bg-gray-900 md:hidden`}
+        } absolute w-full flex-col rounded-b-xl bg-white px-4 drop-shadow-md dark:bg-gray-900 md:hidden`}
       >
         {paths.map((path) => (
           <HeaderLink
