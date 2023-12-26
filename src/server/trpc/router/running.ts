@@ -44,8 +44,6 @@ export const runningRouter = router({
     .mutation(async ({ input, ctx }) => {
       const date = new Date(input.date);
       const yearWeek = formatYearWeek(date);
-      if (!ctx.session.user.isAdmin)
-        throw Error("You are not authorized to create runs");
       return await ctx.db.insert(Runs).values({
         id: createId(),
         date,
